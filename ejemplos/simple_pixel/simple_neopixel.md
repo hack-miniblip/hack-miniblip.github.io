@@ -18,3 +18,33 @@ update(generator) donde generator es una función que hace los cambios al array
 update(Pixel[] array, longitud)
 
 donde decimos los nuevos valores de los pixels
+
+Ejemplo de actualización por array
+
+#include "mbed.h"
+#include "neopixel.h"
+
+#define DATA_PIN P0_9
+#define NLEDS 25
+
+
+int main() {
+
+    neopixel::PixelArray array(DATA_PIN);
+
+    neopixel::Pixel buffer[NLEDS];
+
+    for(int tono=0;tono<256;tono+=10)
+    {
+      for(int i=0;i<NLEDS;i++)
+      {
+         buffer[i].green=tono;
+         buffer[i].blue=tono;
+         buffer[i].red=tono;
+       }
+
+       array.update(buffer, NLEDS);
+    }
+
+
+}
