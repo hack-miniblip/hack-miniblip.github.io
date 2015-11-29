@@ -1,0 +1,1 @@
+SUBSYSTEM=="block", ATTR{size}=="68", SYMLINK="MINIBLIP"
