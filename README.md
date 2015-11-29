@@ -46,12 +46,16 @@ momento que se desmonte. Si no no lo grabará. Para eso, tienes que hacer lo sig
 
 1. Copiar [`60-miniblip.rules`](60-miniblip.rules) a `/etc/udev/rules.d/` . Es decir
 
+```
 	sudo cp 60-miniblip.rules /etc/udev/rules.d/
 	sudo udevadm control --reload
+```
 
 2. Editar con privilegios `sudo` `/etc/fstab` añadiendo
 
+```
 	/dev/MINIBLIP /media/<mi_nombre_de_usuario>/MINIBLIP vfat rw,user,sync 0 0 
+```
 
 La primera línea crea un enlace simbólico para que el dispositivo se pueda identificar fácilmente, y la segunda lo usa para montarlo en una dirección persistente y con los privilegios necesarios.
 
