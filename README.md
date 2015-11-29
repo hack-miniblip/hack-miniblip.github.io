@@ -9,7 +9,7 @@ leds. Está basada en un ARM Cortex-M0 a 48MHz. Incluye 32KB FLASH, 8KB RAM
 
 ## Como comenzar
 
-Conecta la placa a tu USB. Si pulsas el botón cuadrado más cercano al
+Conecta la placa a tu USB. Si pulsas el botón rectangular más cercano al
 USB *mientras estás enchufándolo* se pondrá en "modo programación" y aparecerá en tu ordenador como
 un USB drive. El fichero firmware.bin será el que habrá que sustituir
 por tus propios ficheros cuando los compiles.
