@@ -10,7 +10,7 @@ leds. Está basada en un Cortex.
 ## Como comenzar
 
 Conecta la placa a tu USB. Si pulsas el botón cuadrado más cercano al
-USB se pondrá en "modo programación" y aparecerá en tu ordenador como
+USB *mientras estás enchufándolo* se pondrá en "modo programación" y aparecerá en tu ordenador como
 un USB drive. El fichero firmware.bin será el que habrá que sustituir
 por tus propios ficheros cuando los compiles.
 
