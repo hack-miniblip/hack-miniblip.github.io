@@ -7,11 +7,11 @@ por [BQ](http://github.com/bqlabs) para *wearables* y lo que
 surja. Tiene dos botones, 5 botones capacitivos y un array de
 leds. Está basada en un ARM Cortex-M0 a 48MHz. Incluye 32KB FLASH, 8KB RAM
 
-## Como comenzar
+## Cómo comenzar
 
 Conecta la placa a tu USB. Si pulsas el botón rectangular más cercano al
 USB *mientras estás enchufándolo* se pondrá en "modo programación" y aparecerá en tu ordenador como
-un USB drive. El fichero firmware.bin será el que habrá que sustituir
+un USB drive. El fichero ``firmware.bin`` será el que habrá que sustituir
 por tus propios ficheros cuando los compiles.
 
 ## Creando y compilando un fichero.
@@ -36,7 +36,7 @@ fichero.
 
 ## Guardando el fichero en la placa
 
-Se borra el fichero firmware.bin y se arrastra el nuevo fichero a la
+Se borra el fichero ``firmware.bin`` y se arrastra el nuevo fichero a la
 placa.
 
 En Linux y OSX hay que
@@ -45,19 +45,22 @@ de forma que grabe en la misma en el momento que se escriba, no en el
 momento que se desmonte. Si no no lo grabará. Para eso, tienes que hacer lo siguiente
 
 1. Copiar [`60-miniblip.rules`](60-miniblip.rules) a `/etc/udev/rules.d/` . Es decir
-
-```
+```shell
 	sudo cp 60-miniblip.rules /etc/udev/rules.d/
 	sudo udevadm control --reload
 ```
-
-2. Editar con privilegios `sudo` `/etc/fstab` añadiendo
-
-```
+2. Editar con privilegios de administrador el fichero `/etc/fstab` añadiendo
+```shell
 	/dev/MINIBLIP /media/<mi_nombre_de_usuario>/MINIBLIP vfat noauto,rw,user,sync 0 0
 ```
 
 La primera línea crea un enlace simbólico para que el dispositivo se pueda identificar fácilmente, y la segunda lo usa para montarlo en una dirección persistente y con los privilegios necesarios.
+
+También puedes utilizar el fichero ``install.sh`` y ejecutarlo como administrador (con ``sudo``).
+```shell
+chmod +x install.sh
+sudo ./install.sh
+```
 
 ## Y listo
 
