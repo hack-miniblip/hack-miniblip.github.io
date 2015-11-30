@@ -8,13 +8,12 @@ then
 	echo "Usage: bliploader + [firmaware.bin]";
 else
 	port=$(mount | grep "CRP DISABLD" | grep -Eo "^[^ ]+");
-	echo $port
 	if [ "$port" == "" ]
 	then
 		port=$(mount | grep "MINIBLIP" | grep -Eo "^[^ ]+");
 	fi
 	
-	if ["$port" == ""]
+	if [ "$port" == "" ]
 	then
 		echo "Not mounted"
 	else
