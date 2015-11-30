@@ -35,7 +35,7 @@ Se compila pulsando en el botón correspondiente y se descarga el
 fichero.
 
 ## Guardando el fichero en la placa
-##LINUX Actualizado funciona!
+
 
 1. Mira donde se ha montado la placa escribiendo    
     `mount` 
@@ -46,42 +46,15 @@ fichero.
 3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal    
     `umount /deb/sbd`
 
-
 Usando el script [miniblip_loader](miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
     `bash miniblip_loader.sh + [firmware.bin]`
-	
-	
-## METODO VIEJO NO FUNCIONA CORRECTAMENTE
-
-Se borra el fichero ``firmware.bin`` y se arrastra el nuevo fichero a la
-placa.
-
-En Linux y OSX hay que
-[configurar el sistema para que monte la placa de una forma determinada](https://developer.mbed.org/handbook/Mounting-with-sync),
-de forma que grabe en la misma en el momento que se escriba, no en el
-momento que se desmonte. Si no no lo grabará. Para eso, tienes que hacer lo siguiente
-
-1. Copiar [`60-miniblip.rules`](60-miniblip.rules) a `/etc/udev/rules.d/` . Es decir
-```shell
-	sudo cp 60-miniblip.rules /etc/udev/rules.d/
-	sudo udevadm control --reload
-```
-2. Editar con privilegios de administrador el fichero `/etc/fstab` añadiendo
-```shell
-	/dev/MINIBLIP /media/<mi_nombre_de_usuario>/MINIBLIP vfat noauto,rw,user,sync 0 0
-```
-
-La primera línea crea un enlace simbólico para que el dispositivo se pueda identificar fácilmente, y la segunda lo usa para montarlo en una dirección persistente y con los privilegios necesarios.
-
-También puedes utilizar el fichero ``install.sh`` y ejecutarlo como administrador (con ``sudo``).
-```shell
-chmod +x install.sh
-sudo ./install.sh
-```
 
 ## Y listo
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
 
-## [Cookbook](cookbook.md)
+## Un cookbook
+
+[Cookbook](cookbook.md) con cosillas
+
