@@ -61,6 +61,8 @@ Usando el script [miniblip_loader](miniblip_loader.sh) podemos cargar nuestros p
 	$ miniblip_loader.sh + [firmware.bin]`
 ```
 
+# *OJO:* Si a veces ya no se monta en ningun puerto, reiniciad.
+
 ## Y listo
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
