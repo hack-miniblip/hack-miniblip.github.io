@@ -55,8 +55,7 @@ fichero.
     umount /deb/sbd
 ```
 
-Usando el script [miniblip_loader](miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
-
+Usando el script [miniblip_loader](Scripts/miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
 ```shell
 	$ miniblip_loader.sh + [firmware.bin]`
 ```
@@ -85,4 +84,3 @@ Podéis hacer un pull request a este repo o un simple enlace a este README.
 ## Un cookbook
 
 [Cookbook](cookbook.md) con cosillas
-
