@@ -54,10 +54,10 @@ momento que se desmonte. Si no no lo grabará. Para eso, tienes que hacer lo sig
 2. Editar con privilegios `sudo` `/etc/fstab` añadiendo
 
 ```
-	/dev/MINIBLIP /media/<mi_nombre_de_usuario>/MINIBLIP vfat rw,user,sync 0 0 
+	/dev/MINIBLIP /media/<mi_nombre_de_usuario>/MINIBLIP vfat noauto,rw,user,sync 0 0 
 ```
 
-La primera línea crea un enlace simbólico para que el dispositivo se pueda identificar fácilmente, y la segunda lo usa para montarlo en una dirección persistente y con los privilegios necesarios.
+La primera línea crea un enlace simbólico para que el dispositivo se pueda identificar fácilmente, y la segunda lo usa para montarlo en una dirección persistente y con los privilegios necesarios. El noauto es necesario para que no pare la secuencia de arranque.
 
 ## Y listo
 
