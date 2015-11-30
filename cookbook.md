@@ -38,7 +38,9 @@
 
     serial.printf("Hello world!\n");
 
-    // Podemos usar el ejemplo en python ./ejemplos/leds_serial_potenciometro_buzzer/pythonserial.py 
+    // Podemos usar el ejemplo en python ./ejemplos/leds_serial_potenciometro_buzzer/pythonserial.py
+    // Podemos usar cualquier program monitor serie como Putty o minicom
+
 # Botones
 
     // Definimos el pin como entrada
