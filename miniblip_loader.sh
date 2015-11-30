@@ -3,21 +3,23 @@
 #by @demiurgosoft
 
 
-if [ $# != 1 ] 
-then 
+if [ $# != 1 ]
+then
 	echo "Usage: bliploader + [firmaware.bin]";
 else
-	port=$(mount | grep "CRP DISABLD1" | grep -Eo "^[^ ]+");
+	port=$(mount | grep "CRP DISABLD" | grep -Eo "^[^ ]+");
 
-	if [$port -eq ""] 
-	then 
-		echo "Not mounted";
+	if [$port -eq ""]
+	then
+		port=$(mount | grep "MINIBLIP" | grep -Eo "^[^ ]+");
+	fi
+
+	if [$port -eq ""]
+	then
+		echo "Not mounted"
 	else
 	sudo dd if=$1 of=$port bs=512 seek=4 conv=notrunc
-	umount $port
+	sudo umount $port
 	echo "loaded"
 	fi
 fi
-
-
-

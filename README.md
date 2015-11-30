@@ -38,21 +38,47 @@ fichero.
 
 
 1. Mira donde se ha montado la placa escribiendo    
-    `mount` 
+
+```shell
+	mount
+```
 
 2. Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb)    
-    `sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc`
 
-3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal    
-    `umount /deb/sbd`
+```shell
+	sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc
+```
+
+3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
+
+```
+    umount /deb/sbd
+```
 
 Usando el script [miniblip_loader](miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
-    `bash miniblip_loader.sh + [firmware.bin]`
+
+```shell
+	$ miniblip_loader.sh + [firmware.bin]`
+```
 
 ## Y listo
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
+
+## Para añadir a este repo
+
+Hacer un fork. Una vez hecho
+
+	git remote add upstream git@github.com:hack-miniblip/hack-miniblip.github.io.git
+
+(o equivalente en `https`).
+
+Y recordad antes de hacer cualquier cambio y subirlo
+
+	git pull upstream master
+
+Podéis hacer un pull request a este repo o un simple enlace a este README.
 
 ## Un cookbook
 
