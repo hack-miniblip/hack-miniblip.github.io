@@ -3,41 +3,70 @@
   <head>
     <title>Hello World!</title>
     <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
+    <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css">
     <script src="javascript/jquery-2.1.4.min.js" type="text/javascript"></script>
     <script src="javascript/less.min.js" type="text/javascript"></script>
+    <script src="javascript/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="javascript/main.js" type="text/javascript"></script>
 
   <script>
+	var editor;
 	$( document ).ready(function() {
-		get_list_firmwares_local();
+	    get_list_firmwares_local();
+    
+	    editor = ace.edit("editor");
+	    editor.setTheme("ace/theme/monokai");
+	    editor.getSession().setMode("ace/mode/javascript");
+	    editor.setOptions({
+		  fontSize: "15pt"
+	    });
 	});
   </script>
 
   </head>
   <body>
     <div id = "container"> 
-	<div id = "header">
-	    <h1>MiniBlip</h1>
+	<div id = "toolbar">
+		<ul> 
+			<li> <i class="fa fa-list fa-2x"></i></li>
+			<li> <i class="fa fa-terminal fa-2x"></i></li>
+			<li> <i class="fa fa-code fa-2x"></i></li>
+
+
+		</ul>
 	</div>
 
-        <div id = "firmwares"> 
+	<div id = "main">
 
-	</div>
+		<div id = "firmwares"> 
 
-    	<div id = "board"> 
-		<img src="./images/miniblip_board.png">
-	</div>
+		</div>
+
+	    	<div id = "board"> 
+			<img src="./images/miniblip_board.png">
+		</div>
+
+		<div id="editor">function foo(items) {
+		    var x = "All this is syntax highlighted";
+		    return x;
+		}</div>
+    
 
 
-	<div id = "actions"> 
+		<div id = "actions"> 
+
+		</div>
+
+		<div id = "console"> 
+			<ul>
+				<li> </li>
+				<li> </li>
+			</ul>
+		</div>
 
 	</div>
     </div>
 
     </div>
-
-
-
-
   </body>
 </html>

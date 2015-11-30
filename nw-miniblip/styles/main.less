@@ -49,16 +49,40 @@ table {
 
 
 
-h1 {
-  font-size: 2em;
-  font-weight: 800;
-  padding: 10px 20px;
-}
+
 
 
 body {
   font-family: sans-serif;
 }
+
+
+#toolbar {
+  position: absolute;
+  width: 85px;
+  height: 100%;
+  background: #1081C7;
+  color: white;
+  text-align: center;
+
+
+  ul {
+    padding: 18px 0px;
+    li {
+	padding: 10px 0px;
+    }
+    li:hover {
+  	background-color: rgba(0, 0, 0, 0.22);
+    }
+  }
+}
+
+#main {
+  left: 100px;
+  position: absolute;
+}
+
+
 
 
 
@@ -77,6 +101,14 @@ body {
 	  font-weight: bold;
 	}
   }
+}
+
+#editor {
+  width: 875px;
+  height: 761px;
+  top: 0;
+  position: absolute;
+  left: -15px;
 }
 
 #board {
