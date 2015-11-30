@@ -6,10 +6,15 @@
 # Defines de los pines
 
   #define MATRIX_PIN P0_9
+
   #define LDR_PIN P0_16
+
   #define SPEAKER_PIN P0_8
+
   #define POTENCIOMETER_PIN P0_22
+
   #define BUTTON_PIN P0_23
+
   #define RESET_PIN P0_1
 
   #define NLEDS 25
