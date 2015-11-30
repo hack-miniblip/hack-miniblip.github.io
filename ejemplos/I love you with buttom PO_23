@@ -1,0 +1,146 @@
+// miniblip led matrix demo
+
+#include "mbed.h"
+#include "neopixel.h"
+
+// Matrix led output pin
+#define DATA_PIN P0_9
+DigitalIn pushbutton(P0_23);
+
+void void_matrix(neopixel::Pixel* aux, int tam=25){
+    
+    for(int i=0;i<tam;i++){
+        aux[i].red=0;
+        aux[i].green=0;
+        aux[i].blue=0;
+    }
+}
+
+//Si color = 1 --> rojo. Si color = 2 --> azul Si color = 3 --> azul
+void encenderLed(neopixel::Pixel* aux,int posicion,int color){
+    
+    if(color == 1){
+        aux[posicion].red = 0xff;
+        aux[posicion].blue = 0x00;
+        aux[posicion].green = 0x00;
+    }else if(color == 2){
+        aux[posicion].red = 0x00;
+        aux[posicion].blue = 0xff;
+        aux[posicion].green = 0x00;
+    }else if(color == 3){
+        aux[posicion].red = 0x00;
+        aux[posicion].blue = 0x00;
+        aux[posicion].green = 0xff;        
+    }else if(color == 4){
+        aux[posicion].red = 0x00;
+        aux[posicion].blue = 0x00;
+        aux[posicion].green = 0x00; 
+        
+    }
+}
+//Si color = 1 --> rojo. Si color = 2 --> azul Si color = 3 --> azul
+void corazon(neopixel::Pixel* aux,int color){
+    
+    void_matrix(aux);
+    encenderLed(aux,0,color);
+    encenderLed(aux,1,color);    
+    encenderLed(aux,3,color);
+    encenderLed(aux,4,color);
+    encenderLed(aux,5,color);
+    encenderLed(aux,6,color);
+    encenderLed(aux,7,color);
+    encenderLed(aux,8,color);
+    encenderLed(aux,9,color);
+    encenderLed(aux,10,color);
+    encenderLed(aux,11,color);
+    encenderLed(aux,12,color);
+    encenderLed(aux,13,color);
+    encenderLed(aux,14,color);
+    encenderLed(aux,18,color);
+    encenderLed(aux,17,color);
+    encenderLed(aux,16,color);
+    encenderLed(aux,22,color);    
+    
+}
+
+void LetraI(neopixel::Pixel* aux,int color){
+    
+    void_matrix(aux);
+    encenderLed(aux,0,color);
+    encenderLed(aux,1,color);
+    encenderLed(aux,2,color);
+    encenderLed(aux,3,color);
+    encenderLed(aux,4,color);
+    encenderLed(aux,7,color);
+    encenderLed(aux,12,color);
+    encenderLed(aux,17,color);
+    encenderLed(aux,20,color);
+    encenderLed(aux,21,color);
+    encenderLed(aux,22,color);
+    encenderLed(aux,23,color);
+    encenderLed(aux,24,color);
+    
+    }
+    
+void LetraY(neopixel::Pixel* aux,int color){
+    void_matrix(aux);
+    encenderLed(aux,0,color);
+    encenderLed(aux,4,color);
+    encenderLed(aux,6,color);
+    encenderLed(aux,8,color);
+    encenderLed(aux,12,color);
+    encenderLed(aux,17,color);
+    encenderLed(aux,22,color);
+    
+    }
+    
+
+
+
+int main() {
+    int i;
+    neopixel::Pixel vector[25];
+    
+    neopixel::PixelArray array(DATA_PIN);
+    
+    int contador = 0;
+    while(true){
+        if(contador == 0){
+        
+            LetraI(vector,1);
+            array.update(vector,25);
+        
+                if(pushbutton){
+                     contador++;
+                     wait(1);
+                }
+            
+        }else if(contador == 1){
+            
+            corazon(vector,1);
+            array.update(vector,25);
+            
+             if(pushbutton){
+                     contador++;
+                     wait(1);
+                }
+                
+        }else if(contador == 2){
+            
+            LetraY(vector,1);
+            array.update(vector,25);
+            
+                 if(pushbutton){
+                     contador=0;
+                     wait(1);
+                }
+            
+            }
+    
+    }
+    
+    
+    
+    
+    
+}
