@@ -45,7 +45,9 @@ Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb)
 
     sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc
 
+Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
 
+    umount /deb/sbd
 
 ## METODO VIEJO NO FUNCIONA CORRECTAMENTE
 
