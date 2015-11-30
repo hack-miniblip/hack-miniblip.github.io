@@ -81,3 +81,5 @@ sudo ./install.sh
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
+
+## [Cookbook](cookbook.md)
