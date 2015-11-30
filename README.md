@@ -47,7 +47,7 @@ Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb)
 
 Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
 
-    umount /deb/sbd
+    umount /deb/sdb
 
 ## METODO VIEJO NO FUNCIONA CORRECTAMENTE
 
