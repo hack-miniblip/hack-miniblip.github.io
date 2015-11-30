@@ -28,3 +28,20 @@
 
     AnalogIn   ain(POTENCIOMETER_PIN);
     float valorPot=ain.read();
+
+# Botones
+
+    // Definimos el pin como entrada
+    DigitalIn pushbutton(BUTTON_PIN);
+
+    // Definimos el pin como PWM
+    PwmOut speaker(P0_8);
+
+    while(true){
+
+      if(pushbutton){ // Al pulsar suena
+          speaker=10.0;
+      }else{
+          speaker=0.0;    
+      }
+    }
