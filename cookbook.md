@@ -19,8 +19,8 @@
 PwmOut speaker(SPEAKER_PIN); // el P0_8
 
 float note=440;
-speaker.period(1.0/note);           
-speaker = 50.0;
+speaker.period(1.0/note);  // Usamos el periodo, inverso de la frecuencia          
+speaker = 50.0;  // establecemos el volumen
 
 
 # Lectura de valores analógicos
