@@ -29,6 +29,16 @@
     AnalogIn   ain(POTENCIOMETER_PIN);
     float valorPot=ain.read();
 
+# Escritura por el puerto serie
+
+    // Importamos la librería USBDevice
+    #include "USBSerial.h"
+
+    USBSerial serial;
+
+    serial.printf("Hello world!\n");
+
+    // Podemos usar el ejemplo en python ./ejemplos/leds_serial_potenciometro_buzzer/pythonserial.py 
 # Botones
 
     // Definimos el pin como entrada
