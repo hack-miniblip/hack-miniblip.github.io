@@ -2,7 +2,8 @@
 
 #include "miniblip_lib.h"
 
-//Pone el color dado en  la posicion del array
+// Pone el color dado en  la posicion del array
+// Hace falta hacer un Array.update(buffer,lenght) después
 void setPixel(Pixel []buffer,uint32_t posicion, uint8_t red, uint8_t green, uint8_t blue)
 {
     buffer[posicion].red=red;
