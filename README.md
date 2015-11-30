@@ -91,6 +91,12 @@ Te puedes descargar el programa completo del entorno pulsando con el botón de l
 
 Instálate el entorno de programación siguiendo [estas instrucciones](https://launchpad.net/~terry.guo/+archive/ubuntu/gcc-arm-embedded)
 
+Descomprime el .zip que te bajes en un fichero. Edita el `Makefile` y edita esta línea para poner
+
+    GCC_BIN = /usr/bin/
+
+que es donde se instala el compilador.
+
 Puede que te dé algún problema del estilo
 
 ```
@@ -100,5 +106,18 @@ Puede que te dé algún problema del estilo
 
 En cuyo caso tendrás que recortar el tamaño del fichero, quitando variables e info de depuración, por ejemplo.
 
-Incluso así, *no funciona* Si alguien encuentra la solución, que lo diga...
+Si no te da ningún problema, te generará un `.bin`. Ya casi estás. Tendrás que pillarte el [programa `crcset.c`](Scripts/crcset.c) y compilarlo. Este programa pone los bits de comprobación correctamente, para evitar el error que sale al final:
+
+    *****
+	***** You must modify vector checksum value in *.bin and *.hex files.
+	*****
+
+Con eso, ya haces
+
+	./crcset nombre-del-programa.bin
+
+¡Y ya estás listo!
+
+
+
 
