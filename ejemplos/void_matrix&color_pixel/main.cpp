@@ -7,6 +7,11 @@
 #define DATA_PIN P0_9
 
 
+/*
+fill_pixel es una función que, pasado un buffer, coloca en la posición (x,y) el color rpg dado
+*/
+
+
 void fill_pixel(neopixel::Pixel buffer[25], int x, int y, int red, int green, int blue){
     
     if(x<0) x=0;
@@ -20,6 +25,11 @@ void fill_pixel(neopixel::Pixel buffer[25], int x, int y, int red, int green, in
     buffer[posicion].green=green;
     buffer[posicion].blue=blue;
 }
+
+/*
+void_matrix coge una matriz y la "apaga" (pone todos sus colores a 0)
+*/
+
 
 void void_matrix(neopixel::Pixel aux[25], int tam=25){
     
@@ -41,9 +51,10 @@ int main()
     // The pixel array control class.
     neopixel::PixelArray array(DATA_PIN);
 
+    // Generamos el array y lo vaciamos
     neopixel::Pixel vector[25];
     void_matrix(vector);
-    
+    //Introducimos varios colores de prueba
     fill_pixel(vector,0,0,255,0,0);
     fill_pixel(vector,1,1,255,0,0);
     fill_pixel(vector,2,2,0,255,0);
