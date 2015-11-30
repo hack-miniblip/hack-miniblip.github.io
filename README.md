@@ -35,49 +35,54 @@ Se compila pulsando en el botón correspondiente y se descarga el
 fichero.
 
 ## Guardando el fichero en la placa
-##LINUX Actualizado funciona!
 
-Mira donde se ha montado la placa escribiendo 
 
-    mount 
+1. Mira donde se ha montado la placa escribiendo    
 
-Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb) 
+```shell
+	mount
+```
 
-    sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc
+2. Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb)    
 
-Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
+```shell
+	sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc
+```
 
+3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
+
+```
     umount /deb/sbd
-
-## METODO VIEJO NO FUNCIONA CORRECTAMENTE
-
-Se borra el fichero ``firmware.bin`` y se arrastra el nuevo fichero a la
-placa.
-
-En Linux y OSX hay que
-[configurar el sistema para que monte la placa de una forma determinada](https://developer.mbed.org/handbook/Mounting-with-sync),
-de forma que grabe en la misma en el momento que se escriba, no en el
-momento que se desmonte. Si no no lo grabará. Para eso, tienes que hacer lo siguiente
-
-1. Copiar [`60-miniblip.rules`](60-miniblip.rules) a `/etc/udev/rules.d/` . Es decir
-```shell
-	sudo cp 60-miniblip.rules /etc/udev/rules.d/
-	sudo udevadm control --reload
-```
-2. Editar con privilegios de administrador el fichero `/etc/fstab` añadiendo
-```shell
-	/dev/MINIBLIP /media/<mi_nombre_de_usuario>/MINIBLIP vfat noauto,rw,user,sync 0 0
 ```
 
-La primera línea crea un enlace simbólico para que el dispositivo se pueda identificar fácilmente, y la segunda lo usa para montarlo en una dirección persistente y con los privilegios necesarios.
+Usando el script [miniblip_loader](miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
 
-También puedes utilizar el fichero ``install.sh`` y ejecutarlo como administrador (con ``sudo``).
 ```shell
-chmod +x install.sh
-sudo ./install.sh
+	$ miniblip_loader.sh + [firmware.bin]`
 ```
+
+### **OJO:** Si a veces ya no se monta en ningun puerto, reiniciad.
 
 ## Y listo
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
+
+## Para añadir a este repo
+
+Hacer un fork. Una vez hecho
+
+	git remote add upstream git@github.com:hack-miniblip/hack-miniblip.github.io.git
+
+(o equivalente en `https`).
+
+Y recordad antes de hacer cualquier cambio y subirlo
+
+	git pull upstream master
+
+Podéis hacer un pull request a este repo o un simple enlace a este README.
+
+## Un cookbook
+
+[Cookbook](cookbook.md) con cosillas
+
