@@ -2,7 +2,6 @@
 
 Usa la función fill_pixel de @javacasm, que está en https://github.com/hack-miniblip/hack-miniblip.github.io/blob/master/ejemplos/iluminandoLetras/main.cpp
 */
-
 // miniblip led matrix demo
 
 #include "mbed.h"
@@ -11,7 +10,9 @@ Usa la función fill_pixel de @javacasm, que está en https://github.com/hack-mi
 // Matrix led output pin
 #define DATA_PIN P0_9
 
-AnalogIn   ain(P0_22);
+#define ANALOG_PHOTO P0_16
+#define ANALOG_POTENTIOMETER P0_22
+AnalogIn   ain(ANALOG_POTENTIOMETER);
 
 void fill_pixel(neopixel::Pixel buffer[25], int x, int y, int red, int green, int blue){
     
@@ -50,7 +51,17 @@ int sonrisaTriste[5][5] = {
 {0,0,0,0,0},
 {0,1,1,1,0},
 {1,0,0,0,1}
-};    
+};
+
+int sonrisaRegular[5][5] = {
+{0,1,0,1,0},
+{0,1,0,1,0},
+{0,0,0,0,0},
+{1,1,1,1,1},
+{0,0,0,0,0}
+};   
+
+ 
 
 void drawVector(int theArray[5][5], neopixel::Pixel * vectorPixel, int r, int g, int b){
     for(int i = 0;i<5;i++){
@@ -82,11 +93,13 @@ int main()
     
     while (1) {
         float pot = ain.read() * 100.0f;
-        if(pot<50){
-            drawVector(sonrisa,vector,255,0,0);
-        }else{
+        if(pot<25)
             drawVector(sonrisaTriste,vector,0,0,255);
-        }
+        else 
+            if(pot >=25 && pot <75)
+                drawVector(sonrisaRegular,vector,0,255,0);
+            else
+                drawVector(sonrisa,vector,255,0,0);
         
         array.update(vector, 64);
         wait_ms(500);
