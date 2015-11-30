@@ -63,3 +63,5 @@ La primera línea crea un enlace simbólico para que el dispositivo se pueda ide
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
+
+## [Cookbook](cookbook.md)
