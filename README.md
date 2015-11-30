@@ -84,3 +84,21 @@ Podéis hacer un pull request a este repo o un simple enlace a este README.
 ## Un cookbook
 
 [Cookbook](cookbook.md) con cosillas
+
+## Compilándolo en local
+
+Te puedes descargar el programa completo del entorno pulsando con el botón de la derecha y dándole a "Export program".
+
+Instálate el entorno de programación siguiendo [estas instrucciones](https://launchpad.net/~terry.guo/+archive/ubuntu/gcc-arm-embedded)
+
+Puede que te dé algún problema del estilo
+
+```
+/usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/bin/ld: colorines.elf section `.text' will not fit in region `FLASH'
+/usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/bin/ld: region `FLASH' overflowed by 208 bytes
+```
+
+En cuyo caso tendrás que recortar el tamaño del fichero, quitando variables e info de depuración, por ejemplo.
+
+Incluso así, *no funciona* Si alguien encuentra la solución, que lo diga...
+
