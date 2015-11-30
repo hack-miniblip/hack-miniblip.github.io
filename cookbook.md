@@ -41,6 +41,20 @@
     // Podemos usar el ejemplo en python ./ejemplos/leds_serial_potenciometro_buzzer/pythonserial.py
     // Podemos usar cualquier program monitor serie como Putty o minicom
 
+# Lectura del puerto serie
+
+    // Importamos la librería USBDevice
+    #include "USBSerial.h"
+
+    USBSerial serial;
+    
+    char* readBuffer;
+
+    serial.scanf("%s",readBuffer);
+
+    // OJO: scanf es bloqueante, así que el main loop no continuará hasta que sea lea algo.
+    // Para tener algo que leer, se pueden enviar datos por el puerto serie con 'echo 1 > /dev/ttyACM0'
+
 # Botones
 
     // Definimos el pin como entrada
