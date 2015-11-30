@@ -5,6 +5,7 @@ import time
 
 #Based on example leds_serial_potenciometro_buzzer
 #A koala made this pretty
+#Execute as sudo
 
 
 def connect():
