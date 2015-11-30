@@ -5,13 +5,13 @@ Hackea la MiniBlip, repo para el hackatón CircoLab/BQ/Miniblip
 La [miniblip es](https://github.com/bqlabs/miniBLIP) una placa creada
 por [BQ](http://github.com/bqlabs) para *wearables* y lo que
 surja. Tiene dos botones, 5 botones capacitivos y un array de
-leds. Está basada en un Cortex.
+leds. Está basada en un ARM Cortex-M0 a 48MHz. Incluye 32KB FLASH, 8KB RAM
 
-## Como comenzar
+## Cómo comenzar
 
-Conecta la placa a tu USB. Si pulsas el botón cuadrado más cercano al
+Conecta la placa a tu USB. Si pulsas el botón rectangular más cercano al
 USB *mientras estás enchufándolo* se pondrá en "modo programación" y aparecerá en tu ordenador como
-un USB drive. El fichero firmware.bin será el que habrá que sustituir
+un USB drive. El fichero ``firmware.bin`` será el que habrá que sustituir
 por tus propios ficheros cuando los compiles.
 
 ## Creando y compilando un fichero.
@@ -36,30 +36,25 @@ fichero.
 
 ## Guardando el fichero en la placa
 
-Se borra el fichero firmware.bin y se arrastra el nuevo fichero a la
-placa.
 
-En Linux y OSX hay que
-[configurar el sistema para que monte la placa de una forma determinada](https://developer.mbed.org/handbook/Mounting-with-sync),
-de forma que grabe en la misma en el momento que se escriba, no en el
-momento que se desmonte. Si no no lo grabará. Para eso, tienes que hacer lo siguiente
+Mira donde se ha montado la placa escribiendo 
 
-1. Copiar [`60-miniblip.rules`](60-miniblip.rules) a `/etc/udev/rules.d/` . Es decir
+    mount 
 
-```
-	sudo cp 60-miniblip.rules /etc/udev/rules.d/
-	sudo udevadm control --reload
-```
+Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb) 
 
-2. Editar con privilegios `sudo` `/etc/fstab` añadiendo
+    sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc
 
-```
-	/dev/MINIBLIP /media/<mi_nombre_de_usuario>/MINIBLIP vfat noauto,rw,user,sync 0 0 
-```
+Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
 
-La primera línea crea un enlace simbólico para que el dispositivo se pueda identificar fácilmente, y la segunda lo usa para montarlo en una dirección persistente y con los privilegios necesarios. El noauto es necesario para que no pare la secuencia de arranque.
+    umount /deb/sbd
 
 ## Y listo
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
-programa. 
+programa.
+
+## Un cookbook
+
+[Cookbook](cookbook.md) con cosillas
+
