@@ -37,17 +37,17 @@ fichero.
 ## Guardando el fichero en la placa
 
 
-Mira donde se ha montado la placa escribiendo 
+1. Mira donde se ha montado la placa escribiendo    
+    `mount` 
 
-    mount 
+2. Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb)    
+    `sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc`
 
-Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb) 
+3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal    
+    `umount /deb/sbd`
 
-    sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc
-
-Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
-
-    umount /deb/sdb
+Usando el script [miniblip_loader](miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
+    `bash miniblip_loader.sh + [firmware.bin]`
 
 ## Y listo
 
