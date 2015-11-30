@@ -1,6 +1,6 @@
-#Reloj digital
+#Reloj analogico
 
-Práctica de reloj digital realizada por:
+Práctica de reloj analogico realizada por:
 
   - Juan Antonio Velasco Gómez
   - Antonio Solis Izquierdo
