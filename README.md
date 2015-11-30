@@ -66,6 +66,20 @@ Usando el script [miniblip_loader](miniblip_loader.sh) podemos cargar nuestros p
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
 
+## Para añadir a este repo
+
+Hacer un fork. Una vez hecho
+
+	git remote add upstream git@github.com:hack-miniblip/hack-miniblip.github.io.git
+
+(o equivalente en `https`).
+
+Y recordad antes de hacer cualquier cambio y subirlo
+
+	git pull upstream master
+
+Podéis hacer un pull request a este repo o un simple enlace a este README.
+
 ## Un cookbook
 
 [Cookbook](cookbook.md) con cosillas
