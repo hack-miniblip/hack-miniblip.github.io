@@ -59,7 +59,7 @@ void bordea(ball *b)
 
 
 // Movemos la bola, ahora mismo sin v, solo +1,+1
-void move(ball *b)
+void mueve(ball *b)
 {
 
     b->x+=b->vx;
@@ -68,32 +68,14 @@ void move(ball *b)
     bordea(b);
 }
 
-void mueve(ball *bolas, int length)
+void pinta (ball * bola)
 {
-    for(int i=0;i<length;i++)
-    {
-        move(bolas+i);
-   }
+    setPixel(bola->x,bola->y,bola->p.red,bola->p.green,bola->p.blue);
 }
 
-
-
-void pinta (ball * bolas,int length)
+void borra (ball * bola)
 {
-    for(int i=0;i<length;i++)
-    {
-        ball *bola=(bolas+i);
-        setPixel(bola->x,bola->y,bola->p.red,bola->p.green,bola->p.blue);
-    }
-}
-
-void borra (ball * bolas,int length)
-{
-    for(int i=0;i<length;i++)
-    {
-        ball *bola=(bolas+i);
-        setPixel(bola->x,bola->y,0,0,0);
-    }
+    setPixel(bola->x,bola->y,0,0,0);
 }
 
 int main()
@@ -120,26 +102,28 @@ ballB.vy=0;
 ballW.p.green=55;
 ballW.p.red=55;
 ballW.p.blue=55;
-ballW.x=2;
-ballW.y=2;
+ballW.x=1;
+ballW.y=1;
 ballW.vx=1;
 ballW.vy=2;
 
 
-ball balls[3]={ballR,ballG,ballB};
+ball balls[NBALLS]={ballR,ballG,ballB,ballW};
 
         neopixel::PixelArray array(MATRIX_PIN);
 
  //   serial.printf("Hello world!\n");
     while(true) {
 
-             borra(balls,NBALLS);
-             mueve(balls,NBALLS);
-             pinta(balls,NBALLS);
-
+             for(int i=0;i<NBALLS; i++)
+             {
+                borra(&(balls[i]));
+                mueve(&(balls[i]));
+                pinta(&(balls[i]));
+            }
 
         array.update(buffer, NLEDS);
-        wait_ms(400);
+        wait_ms(500);
     }
 
 }
