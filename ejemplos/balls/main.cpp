@@ -49,12 +49,41 @@ void setPixel(uint8_t x,uint8_t y, uint8_t red, uint8_t green, uint8_t blue) {
 // Ajustamos la posicin segun los bordes
 void bordea(ball *b)
 {
+    // bordes circulares
+    /*
     if(b->x>XMAX)
         b->x=XMIN;
 
 
     if(b->y>YMAX)
         b->y=YMIN;
+        */
+
+     // Rebotan en la pared
+
+    if(b->y>YMAX)
+    {
+        b->y=YMAX;
+        b->vy=-b->vy;
+        }
+
+    if(b->y<YMIN)
+    {
+        b->y=YMIN;
+        b->vy=-b->vy;
+        }
+
+    if(b->x>XMAX)
+    {
+        b->x=XMAX;
+        b->vx=-b->vx;
+        }
+
+    if(b->x<XMIN)
+    {
+        b->x=XMIN;
+        b->vx=-b->vx;
+        }
 }
 
 
@@ -112,7 +141,7 @@ ball balls[NBALLS]={ballR,ballG,ballB,ballW};
 
         neopixel::PixelArray array(MATRIX_PIN);
 
- //   serial.printf("Hello world!\n");
+
     while(true) {
 
              for(int i=0;i<NBALLS; i++)
