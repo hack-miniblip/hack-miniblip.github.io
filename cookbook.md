@@ -24,6 +24,14 @@
 
 # Lectura de valores analógicos
 
+El LPC11u24 tiene 6 adc de los que MiniBip tiene disponibles 5 (en los 5 contactos circulares)
+
+  AD0 en P0.11
+  AD1 en P0.12
+  AD2 en P0.13
+  AD3 en P0.14
+  AD4 en P0.15
+
 ## Potenciometro
 
     AnalogIn   ain(POTENCIOMETER_PIN);
@@ -47,7 +55,7 @@
     #include "USBSerial.h"
 
     USBSerial serial;
-    
+
     char* readBuffer;
 
     serial.scanf("%s",readBuffer);
