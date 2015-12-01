@@ -35,51 +35,90 @@ Se compila pulsando en el botón correspondiente y se descarga el
 fichero.
 
 ## Guardando el fichero en la placa
-##LINUX Actualizado funciona!
 
-Mira donde se ha montado la placa escribiendo 
 
-    mount 
+1. Mira donde se ha montado la placa escribiendo    
 
-Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb) 
-
-    sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc
-
-Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
-
-    umount /deb/sbd
-
-## METODO VIEJO NO FUNCIONA CORRECTAMENTE
-
-Se borra el fichero ``firmware.bin`` y se arrastra el nuevo fichero a la
-placa.
-
-En Linux y OSX hay que
-[configurar el sistema para que monte la placa de una forma determinada](https://developer.mbed.org/handbook/Mounting-with-sync),
-de forma que grabe en la misma en el momento que se escriba, no en el
-momento que se desmonte. Si no no lo grabará. Para eso, tienes que hacer lo siguiente
-
-1. Copiar [`60-miniblip.rules`](60-miniblip.rules) a `/etc/udev/rules.d/` . Es decir
 ```shell
-	sudo cp 60-miniblip.rules /etc/udev/rules.d/
-	sudo udevadm control --reload
-```
-2. Editar con privilegios de administrador el fichero `/etc/fstab` añadiendo
-```shell
-	/dev/MINIBLIP /media/<mi_nombre_de_usuario>/MINIBLIP vfat noauto,rw,user,sync 0 0
+	mount
 ```
 
-La primera línea crea un enlace simbólico para que el dispositivo se pueda identificar fácilmente, y la segunda lo usa para montarlo en una dirección persistente y con los privilegios necesarios.
+2. Una vez sabemos donde está nuestra miniblip (en mi caso /dev/sdb)    
 
-También puedes utilizar el fichero ``install.sh`` y ejecutarlo como administrador (con ``sudo``).
 ```shell
-chmod +x install.sh
-sudo ./install.sh
+	sudo dd if=nuevo_firmware.bin of=/dev/sdb bs=512 seek=4 conv=notrunc
 ```
+
+3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
+
+```
+umount /deb/sdb
+
+```
+
+Usando el script [miniblip_loader](Scripts/miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
+```shell
+	$ miniblip_loader.sh + [firmware.bin]`
+```
+
+### **OJO:** Si a veces ya no se monta en ningun puerto, reiniciad.
 
 ## Y listo
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
 
-## [Cookbook](cookbook.md)
+## Para añadir a este repo
+
+Hacer un fork. Una vez hecho
+
+	git remote add upstream git@github.com:hack-miniblip/hack-miniblip.github.io.git
+
+(o equivalente en `https`).
+
+Y recordad antes de hacer cualquier cambio y subirlo
+
+	git pull upstream master
+
+Podéis hacer un pull request a este repo o un simple enlace a este README.
+
+## Un cookbook
+
+[Cookbook](cookbook.md) con cosillas
+
+## Compilándolo en local
+
+Te puedes descargar el programa completo del entorno pulsando con el botón de la derecha y dándole a "Export program".
+
+Instálate el entorno de programación siguiendo [estas instrucciones](https://launchpad.net/~terry.guo/+archive/ubuntu/gcc-arm-embedded)
+
+Descomprime el .zip que te bajes en un fichero. Edita el `Makefile` y edita esta línea para poner
+
+    GCC_BIN = /usr/bin/
+
+que es donde se instala el compilador.
+
+Puede que te dé algún problema del estilo
+
+```
+/usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/bin/ld: colorines.elf section `.text' will not fit in region `FLASH'
+/usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/bin/ld: region `FLASH' overflowed by 208 bytes
+```
+
+En cuyo caso tendrás que recortar el tamaño del fichero, quitando variables e info de depuración, por ejemplo.
+
+Si no te da ningún problema, te generará un `.bin`. Ya casi estás. Tendrás que pillarte el [programa `crcset.c`](Scripts/crcset.c) y compilarlo. Este programa pone los bits de comprobación correctamente, para evitar el error que sale al final:
+
+    *****
+	***** You must modify vector checksum value in *.bin and *.hex files.
+	*****
+
+Con eso, ya haces
+
+	./crcset nombre-del-programa.bin
+
+¡Y ya estás listo!
+
+
+
+

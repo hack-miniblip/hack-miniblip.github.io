@@ -1,0 +1,150 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+
+
+
+body {
+  font-family: sans-serif;
+}
+
+
+#toolbar {
+  position: absolute;
+  width: 85px;
+  height: 100%;
+  background: #1081C7;
+  color: white;
+  text-align: center;
+
+
+  ul {
+    padding: 18px 0px;
+    li {
+	padding: 10px 0px;
+    }
+    li:hover {
+  	background-color: rgba(0, 0, 0, 0.22);
+    }
+  }
+}
+
+#main {
+  left: 100px;
+  position: absolute;
+}
+
+#actions {
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	right: -32px;
+	background: rgb(255, 223, 0);
+	padding: 10px;
+	border-radius: 0px 0px 2px 2px;
+	box-shadow: 0px 0px 10px black;
+	color: rgb(95, 91, 10);
+
+	
+	li {
+	  padding: 10px;
+	}
+
+}
+
+
+#firmware-list {
+  float: left;
+  width: 200px;
+  background: white;
+  height: 500px;
+  font-size: 1.2em;
+
+  .item {
+	  border-bottom: 1px dotted black;
+	  padding: 11px;
+
+	.name {
+	  font-weight: bold;
+	}
+
+	.author {
+	  color: gray;
+	  font-style: italic;
+	  font-size: 0.8em;
+	}
+
+	&:hover {
+ 	 background: rgba(0, 0, 0, 0.08);
+	}
+  }
+}
+
+#editor {
+  width: 875px;
+  height: 761px;
+  top: 0;
+  position: absolute;
+  left: -15px;
+}
+
+#board {
+  float: left;
+  width: calc(600px);
+  height: 600px;
+  text-align: center;
+
+  img {
+	  width: 300px;
+	  opacity: 0.5;
+  }
+}
+

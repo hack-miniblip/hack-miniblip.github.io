@@ -1,0 +1,10 @@
+{
+  "name": "miniblip",
+  "version": "0.0.1",
+  "main": "index.html",
+  "window": {
+    "toolbar": true,
+    "width": 960,
+    "height": 800
+  }
+}
