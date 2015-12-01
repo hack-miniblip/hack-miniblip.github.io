@@ -10,8 +10,10 @@
 
 
 struct ball {
-   uint8_t x;
-   uint8_t y;
+   int8_t x;
+   int8_t vx;
+   int8_t y;
+   int8_t vy;
    neopixel::Pixel p;
 };
 
@@ -33,6 +35,7 @@ void setPixel(uint32_t posicion, uint8_t red, uint8_t green, uint8_t blue) {
 }
 
 void setPixel(uint8_t x,uint8_t y, uint8_t red, uint8_t green, uint8_t blue) {
+    serial.printf("%d,%d",x,y);
     setPixel(x*5+y,red,green,blue);
 }
 
@@ -40,6 +43,8 @@ void setPixel(uint8_t x,uint8_t y, uint8_t red, uint8_t green, uint8_t blue) {
 #define YMIN 0
 #define XMAX 4
 #define YMAX 4
+
+#define NBALLS 4
 
 // Ajustamos la posicin segun los bordes
 void bordea(ball *b)
@@ -57,8 +62,8 @@ void bordea(ball *b)
 void move(ball *b)
 {
 
-    b->x+=+1;
-    b->y+=+1;
+    b->x+=b->vx;
+    b->y+=b->vy;
 
     bordea(b);
 }
@@ -67,7 +72,7 @@ void mueve(ball *bolas, int length)
 {
     for(int i=0;i<length;i++)
     {
-    move((bolas+i));
+        move(bolas+i);
    }
 }
 
@@ -94,31 +99,47 @@ void borra (ball * bolas,int length)
 int main()
 {
 
-struct ball ballR,ballG,ballB;
-ball balls[3]={ballR,ballG,ballB};
+struct ball ballR,ballG,ballB,ballW;
 
-ballR.p.red=255;
+
+ballR.p.red=55;
 ballR.x=0;
 ballR.y=4;
-ballG.p.green=255;
+ballR.vx=1;
+ballR.vy=1;
+ballG.p.green=55;
 ballG.x=1;
 ballG.y=3;
-ballB.p.blue=255;
+ballG.vx=0;
+ballG.vy=1;
+ballB.p.blue=55;
 ballB.x=3;
 ballB.y=1;
+ballB.vx=1;
+ballB.vy=0;
+ballW.p.green=55;
+ballW.p.red=55;
+ballW.p.blue=55;
+ballW.x=2;
+ballW.y=2;
+ballW.vx=1;
+ballW.vy=2;
+
+
+ball balls[3]={ballR,ballG,ballB};
 
         neopixel::PixelArray array(MATRIX_PIN);
 
  //   serial.printf("Hello world!\n");
     while(true) {
 
-             borra(balls,3);
-             mueve(balls,3);
-             pinta(balls,3);
+             borra(balls,NBALLS);
+             mueve(balls,NBALLS);
+             pinta(balls,NBALLS);
 
 
         array.update(buffer, NLEDS);
-        wait_ms(200);
+        wait_ms(400);
     }
 
 }
