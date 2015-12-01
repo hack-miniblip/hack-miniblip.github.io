@@ -5,7 +5,7 @@ Hackea la MiniBlip, repo para el hackatón CircoLab/BQ/Miniblip
 La [miniblip es](https://github.com/bqlabs/miniBLIP) una placa creada
 por [BQ](http://github.com/bqlabs) para *wearables* y lo que
 surja. Tiene dos botones, 5 botones capacitivos y un array de
-leds. Está basada en un ARM Cortex-M0 a 48MHz. Incluye 32KB FLASH, 8KB RAM
+leds. Está basada en un ARM Cortex-M0 a 48MHz, el LPC11U24 que incluye 32KB FLASH y 8KB RAM y funciona a 48MHz ([más detalles](https://developer.mbed.org/platforms/mbed-LPC11U24/#features))
 
 ## Cómo comenzar
 
@@ -118,7 +118,3 @@ Con eso, ya haces
 	./crcset nombre-del-programa.bin
 
 ¡Y ya estás listo!
-
-
-
-
