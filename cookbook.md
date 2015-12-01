@@ -14,6 +14,12 @@
 
     #define NLEDS 25
 
+    #define AD0 P0_11
+    #define AD1 P0_12
+    #define AD2 P0_13
+    #define AD3 P0_14
+    #define AD4 P0_15
+
 # Sonidos
 
     PwmOut speaker(SPEAKER_PIN); // el P0_8
@@ -31,6 +37,9 @@ El LPC11u24 tiene 6 adc de los que MiniBip tiene disponibles 5 (en los 5 contact
   AD2 en P0.13
   AD3 en P0.14
   AD4 en P0.15
+
+  ¿EL LDR en P0.16 y el Potenciometro en P0.22?
+
 
 ## Potenciometro
 
