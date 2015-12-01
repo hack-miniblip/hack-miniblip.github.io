@@ -82,11 +82,26 @@ body {
   position: absolute;
 }
 
+#actions {
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	right: -32px;
+	background: rgb(255, 223, 0);
+	padding: 10px;
+	border-radius: 0px 0px 2px 2px;
+	box-shadow: 0px 0px 10px black;
+	color: rgb(95, 91, 10);
+
+	
+	li {
+	  padding: 10px;
+	}
+
+}
 
 
-
-
-#firmwares {
+#firmware-list {
   float: left;
   width: 200px;
   background: white;
@@ -99,6 +114,16 @@ body {
 
 	.name {
 	  font-weight: bold;
+	}
+
+	.author {
+	  color: gray;
+	  font-style: italic;
+	  font-size: 0.8em;
+	}
+
+	&:hover {
+ 	 background: rgba(0, 0, 0, 0.08);
 	}
   }
 }
