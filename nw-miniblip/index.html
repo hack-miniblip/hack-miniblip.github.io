@@ -13,7 +13,10 @@
 	var editor;
 	$( document ).ready(function() {
             bind_buttons();
-	    get_list_firmwares_local();
+	    hide_all_sections(); 
+	    show_section_firmware_list();
+	    //get_list_firmwares_local();
+	    get_list_firmwares_remote();
     
 	    editor = ace.edit("editor");
 	    editor.setTheme("ace/theme/monokai");
