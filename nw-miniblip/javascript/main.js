@@ -1,3 +1,13 @@
+// TODO 
+// GET REMOTE JSON
+// DOWNLOAD FILE ON ITEM CLICK 
+// CHECK BOARD STATUS 
+// UPLOAD FIRMWARE 
+//
+var fs = require("fs");
+var http = require('http');
+
+
 function detect_board() {
 
 
@@ -38,7 +48,15 @@ function init_console(div) {
 
 function get_list_firmwares_remote() {
 
+	var url = "https://raw.githubusercontent.com/hack-miniblip/apps/master/firmware_list.json"; 
 
+	$.get(url, function(data) {
+	  var obj = $.parseJSON(data);
+	  $.each(obj, function(i, value) {
+		add_item_to_firmware_list(obj[i], true);
+	  });
+
+	});
 }
 
 function get_local_firmware_path(firmware_name) {
@@ -50,13 +68,35 @@ function get_local_firmware_path(firmware_name) {
 	return path;
 }
 
-function get_remote_firmware_url() {
+function get_remote_firmware_url(name) {
+	return "https://github.com/hack-miniblip/apps/raw/master/"+name+"/firmware.bin";
+}
 
+function add_item_to_firmware_list(obj, isRemote) {
+	console.log("added " + obj.name);	
+	var file_url = "";	
+	if (isRemote) {
+		file_url = get_remote_firmware_url(obj.name);
+console.log(file_url);
+	} else { 
+		file_url = get_local_firmware_path(obj.name);
+	}
 
+	$("#firmware-list").append('<div class="item" id = '+obj.id +'><div class="name">' + obj.name +'</div><div class="author">'+obj.author+'</div></div>');
+			$("#firmware-list #" + obj.id).click(function() {
+
+				if (isRemote) {
+					download_firmware(file_url, function() {
+						//upload_firmware(file_url, "/dev/sdb");
+					});
+				} else {
+					upload_firmware(file_url, "/dev/sdb");	
+				}
+
+			});
 }
 
 function get_list_firmwares_local() {
-	var fs = require("fs");
 	console.log(process.cwd());
 
 	fs.readFile("firmwares.json", "utf8", function(error, data) {
@@ -64,29 +104,42 @@ function get_list_firmwares_local() {
 		var obj = $.parseJSON( data );
 
 		$.each(obj, function(i, value) {
-			console.log(obj[i].name);
-			$("#firmware-list").append('<div class="item" id = '+obj[i].id +'><div class="name">' + obj[i].name +'</div><div class="author">'+obj[i].author+'</div></div>');
-			$("#firmware-list #" + obj[i].id).click(function() {
-				upload_firmware(get_local_firmware_path(obj[i].id), "/dev/sdb");
-			});
+			add_item_to_firmware_list(obj[i]);
 		});
 		//console.log(obj);
-	});	
+	});   
+} 
+
+
+//TODO check md5
+function download_firmware(name, url, callback) {
+	if (!fs.existsSync("./tmp")){
+    		fs.mkdirSync("./tmp");
+	}
+
+	var path = process.cwd() + "/" + name;
+
+	var file = fs.createWriteStream(path);
+
+	var request = http.get(url, function (response) {
+	    response.pipe(file);
+	    callback();
+	});
 }
 
 
-//check md5
-function download_firmware() {
-
+function show_section_firmware_list() {
+	$("#main #firmware-list").show();
 }
 
-
-
+function show_section_code() {
+	$("#main #editor-container").show();
+}
 
 function bind_buttons() {
 	$("#toolbar #list").click(function() {
 		hide_all_sections();
-		$("#main #firmware-list").show();
+		show_section_firmware_list();
 	});
 
 	$("#toolbar #console").click(function() {
@@ -96,7 +149,7 @@ function bind_buttons() {
 
 	$("#toolbar #code").click(function() {
 		hide_all_sections();
-		$("#main #editor-container").show();
+		show_section_code();
 	});
 }
 
