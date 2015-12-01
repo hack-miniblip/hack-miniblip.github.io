@@ -52,7 +52,7 @@ fichero.
 3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
 
 ```
-umount /deb/sdb
+umount /dev/sdb
 
 ```
 
