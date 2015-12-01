@@ -68,6 +68,10 @@ Usando el script [miniblip_loader](Scripts/miniblip_loader.sh) podemos cargar nu
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
 
+## Binarios
+
+Puedes ver los binarios en [este repositorio](https://github.com/hack-miniblip/apps/)
+
 ## Para añadir a este repo
 
 Hacer un fork. Una vez hecho
@@ -118,7 +122,3 @@ Con eso, ya haces
 	./crcset nombre-del-programa.bin
 
 ¡Y ya estás listo!
-
-
-
-
