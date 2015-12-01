@@ -38,7 +38,7 @@ El LPC11u24 tiene 6 adc de los que MiniBip tiene disponibles 5 (en los 5 contact
   AD3 en P0.14
   AD4 en P0.15
 
-  ¿EL LDR en P0.16 y el Potenciometro en P0.22?
+  ¿EL LDR en P0.16 y el Potenciómetro en P0.22?
 
 
 ## Potenciometro
