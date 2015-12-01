@@ -8,6 +8,7 @@
 #define MATRIX_PIN P0_9
 #define NLEDS 25
 
+#define ANALOG_POTENTIOMETER P0_22
 
 struct ball {
    int8_t x;
@@ -152,7 +153,8 @@ ball balls[NBALLS]={ballR,ballG,ballB,ballW};
             }
 
         array.update(buffer, NLEDS);
-        wait_ms(500);
+        float pot = ain.read() * 500.0f;
+        wait_ms(pot);
     }
 
 }
