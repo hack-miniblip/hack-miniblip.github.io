@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "author": "victor",
   "filename": "anim",
+  "id": 1,
   "type": "",
   "image": "yes", 
   "md5": "" 
@@ -13,6 +14,7 @@
   "version": "0.0.1",
   "author": "victor2",
   "filename": "serial", 
+  "id": 2,
   "type": "firmware", 
   "image": "yes",
   "md5": ""

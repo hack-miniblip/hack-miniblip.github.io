@@ -52,7 +52,8 @@ fichero.
 3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
 
 ```
-    umount /deb/sbd
+umount /deb/sdb
+
 ```
 
 Usando el script [miniblip_loader](Scripts/miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
