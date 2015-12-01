@@ -52,7 +52,7 @@ fichero.
 3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
 
 ```
-umount /deb/sdb
+umount /dev/sdb
 
 ```
 
@@ -67,6 +67,10 @@ Usando el script [miniblip_loader](Scripts/miniblip_loader.sh) podemos cargar nu
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
+
+## Binarios
+
+Puedes ver los binarios en [este repositorio](https://github.com/hack-miniblip/apps/)
 
 ## Para añadir a este repo
 

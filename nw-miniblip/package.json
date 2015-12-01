@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "main": "index.html",
   "window": {
-    "toolbar": true,
+    "toolbar": false,
     "width": 960,
-    "height": 800
+    "height": 800,
+    "resizable": false
   }
 }
