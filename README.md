@@ -2,6 +2,8 @@
 
 Hackea la MiniBlip, repo para el hackatón CircoLab/BQ/Miniblip
 
+Puedes ver este contenido en versión [web](http://hack-miniblip.github.io/).
+
 La [miniblip es](https://github.com/bqlabs/miniBLIP) una placa creada
 por [BQ](http://github.com/bqlabs) para *wearables* y lo que
 surja. Tiene dos botones, 5 botones capacitivos y un array de
