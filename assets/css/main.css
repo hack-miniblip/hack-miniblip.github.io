@@ -1,4 +1,4 @@
-@import url("font-awesome.min.css");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
 @import url("http://fonts.googleapis.com/css?family=Roboto:100,300,100italic,300italic");
 
 /*
@@ -3333,7 +3333,6 @@
 	#banner {
 		background-attachment: fixed;
 		background-color: #272833;
-		background-image: url("../../images/banner.jpg");
 		background-position: center center;
 		background-size: cover;
 		box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25);
@@ -3999,3 +3998,7 @@
 					}
 
 	}
+
+.imgauthor{
+	font-size: 60%;
+}
