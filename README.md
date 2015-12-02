@@ -70,7 +70,7 @@ programa.
 
 ## Binarios
 
-Puedes ver los binarios en [este repositorio](https://github.com/hack-miniblip/apps/)
+Puedes ver los binarios en [este repositorio](https://github.com/hack-miniblip/apps/). Si quieres subir el tuyo propio, haz un *fork*, [incorpora tu binario siguiendo las instrucciones](https://github.com/hack-miniblip/apps/blob/master/README.md) y haz un pull request.
 
 ## Para añadir a este repo
 
