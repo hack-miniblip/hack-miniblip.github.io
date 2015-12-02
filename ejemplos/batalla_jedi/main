@@ -171,6 +171,45 @@ void sithyjedi5(neopixel::Pixel* aux){
     encenderLed(aux,16,2);
     encenderLed(aux,11,2);
     }
+void sithyjedi6(neopixel::Pixel* aux){
+    void_matrix(aux);
+    encenderLed(aux,14,5);
+    encenderLed(aux,19,5);    
+    encenderLed(aux,24,5);    
+    encenderLed(aux,10,6);
+    encenderLed(aux,15,6);    
+    encenderLed(aux,20,6); 
+    encenderLed(aux,13,1);
+    encenderLed(aux,9,1);
+    encenderLed(aux,16,2);
+    encenderLed(aux,11,2);
+    }
+void sithyjedi7(neopixel::Pixel* aux){
+    void_matrix(aux);
+    encenderLed(aux,14,5);
+    encenderLed(aux,19,5);    
+    encenderLed(aux,24,5);    
+    encenderLed(aux,10,6);
+    encenderLed(aux,15,6);    
+    encenderLed(aux,20,6); 
+    encenderLed(aux,13,1);
+    encenderLed(aux,9,1);
+    encenderLed(aux,11,2);
+    encenderLed(aux,5,2);
+    }
+void sithyjedi8(neopixel::Pixel* aux){
+    void_matrix(aux);
+    encenderLed(aux,14,5);
+    encenderLed(aux,19,5);    
+    encenderLed(aux,24,5);    
+    encenderLed(aux,10,6);
+    encenderLed(aux,15,6);    
+    encenderLed(aux,20,6); 
+    encenderLed(aux,13,1);
+    encenderLed(aux,18,1);
+    encenderLed(aux,16,2);
+    encenderLed(aux,17,2);
+    }
 void intro(neopixel::Pixel* aux){
     void_matrix(aux);
     encenderLed(aux,3,1);
@@ -229,12 +268,21 @@ int main() {
             sithyjedi5(vector);
             array.update(vector,25);
             wait(1);
+            
+            sithyjedi6(vector);
+            array.update(vector,25);
+            wait(1);
+            
+            sithyjedi7(vector);
+            array.update(vector,25);
+            wait(1);
+            
+            sithyjedi8(vector);
+            array.update(vector,25);
+            wait(1);
     
     
     }
-    
-    
-    
-    
+ 
     
 }
