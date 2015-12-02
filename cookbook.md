@@ -30,7 +30,7 @@
 
 # Lectura de valores analógicos
 
-El LPC11u24 tiene 8 adc de los que MiniBip tiene disponibles ¿7?
+El LPC11u24 tiene 8 adc de los que MiniBip tiene disponibles 7 (el octavo está conectado al botón y solo se usa como digital)
 
     5 contactos circulares
       AD0 en P0.11
