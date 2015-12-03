@@ -82,7 +82,7 @@ console.log(file_url);
 		file_url = get_local_firmware_path(obj.name);
 	}
 
-	$("#firmware-list").append('<div class="item" id = '+obj.id +'><div class="name">' + obj.name +'</div><div class="author">'+obj.author+'</div></div>');
+	$("#firmware-list #list").append('<div class="item" id = '+obj.id +'><div class="name">' + obj.name +'</div><div class="author">'+obj.author+'</div></div>');
 			$("#firmware-list #" + obj.id).click(function() {
 
 				if (isRemote) {
@@ -151,6 +151,20 @@ function bind_buttons() {
 		hide_all_sections();
 		show_section_code();
 	});
+}
+
+function bind_drag_and_drop_area() {
+	var holder = document.getElementById('board');
+	holder.ondragover = function () { this.className = 'hover'; return false; };
+	holder.ondragleave = function () { this.className = ''; return false; };
+	holder.ondrop = function (e) {
+	  e.preventDefault();
+
+	  for (var i = 0; i < e.dataTransfer.files.length; ++i) {
+	    console.log(e.dataTransfer.files[i].path);
+	  }
+	  return false;
+	};
 }
 
 

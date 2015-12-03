@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello World!</title>
+    <title>MiniBlip Studio</title>
     <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
     <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css">
     <script src="javascript/jquery-2.1.4.min.js" type="text/javascript"></script>
@@ -13,6 +13,7 @@
 	var editor;
 	$( document ).ready(function() {
             bind_buttons();
+	    bind_drag_and_drop_area();
 	    hide_all_sections(); 
 	    show_section_firmware_list();
 	    //get_list_firmwares_local();
@@ -33,9 +34,8 @@
 	<div id = "toolbar">
 		<ul> 
 			<li id = "list"> <i class="fa fa-list fa-2x"></i></li>
-			<li id = "console"> <i class="fa fa-terminal fa-2x"></i></li>
 			<li id = "code"> <i class="fa fa-code fa-2x"></i></li>
-
+			<li class = "disabled" id = "console"> <i class="fa fa-terminal fa-2x"></i></li>
 
 		</ul>
 	</div>
@@ -43,7 +43,8 @@
 	<div id = "main">
 
 		<div id = "firmware-list"> 
-
+			<h1> FIRMWARES </h1>
+			<div id = "list"> </div>
 		</div>
 
 	    	<div id = "board"> 
@@ -77,7 +78,13 @@ void setup() {
     tick.attach(detect, 1.0 / 40.0);
 }
 
-			</div>		
+			</div>	
+
+			<div id = "info_todo"> 
+
+ El editor/compilador offline podria funcionar, pero aun no lo hace! echas una mano? <a href="https://github.com/hack-miniblip/hack-miniblip.github.io"> Hack MiniBlip </a> 
+  
+			</div>
 		</div>
     
 
