@@ -1,4 +1,4 @@
-l# NW-MINIBLIP
+# NW-MINIBLIP
 
 Programa multiproposito para trabajar con la Miniblip 
 
