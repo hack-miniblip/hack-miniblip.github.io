@@ -1,12 +1,13 @@
 // TODO 
 // OK - GET REMOTE JSON
-// DOWNLOAD FILE ON ITEM CLICK 
+// OK - DOWNLOAD FILE ON ITEM CLICK 
 // CHECK BOARD STATUS 
 // UPLOAD FIRMWARE 
 //
 var fs = require("fs");
 var https = require('https');
 var md5 = require('md5');
+var httpreq = require('httpreq');
 
 
 function detect_board() {
@@ -92,6 +93,8 @@ console.log(file_url);
 	$("#firmware-list #list").append($item)
 
 	$item.click(function() {
+		$(".item").removeClass("selected");
+		$(this).addClass("selected");
 		var $div = $("#firmware-upload-section #action");
 	
 		$div.fadeOut("500", function() {
@@ -103,9 +106,10 @@ console.log(file_url);
 		});
 
 		$div.find("#upload").click(function() {
+			
 			if (isRemote) {
 				download_firmware(obj, function() {
-					//upload_firmware(file_url, "/dev/sdb");
+					upload_firmware(file_url, "/dev/sdb");
 				});
 			} else {
 				upload_firmware(file_url, "/dev/sdb");	
@@ -129,41 +133,34 @@ function get_list_firmwares_local() {
 } 
 
 
-//TODO check md5
 function download_firmware(obj, callback) {
 	if (!fs.existsSync("./tmp")){
     		fs.mkdirSync("./tmp");
 	}
 
-	var url = get_remote_firmware_url(obj.name);
-	var path = process.cwd() + "/tmp/" + obj.name+".bin";
-	console.log("saving from: "+ url);
-	console.log("saving to " + path );
+	var from = get_remote_firmware_url(obj.name);
+	var to = process.cwd() + "/tmp/" + obj.name+".bin";
+	//console.log("saving from: "+ from);
+	//console.log("saving to " + to );
 
-	var file = fs.createWriteStream(path);
-
-	var request = https.get(url, function(response) {
-		console.log(response);
-	    response.pipe(file);
-	
-	    file.on('finish', function(d) {
-		//check md5
-		var md5result;
-		fs.readFile(path, function(err, buf) {
+	httpreq.download(from, to
+	, function (err, progress){
+	    if (err) return console.log(err);
+	    //console.log("downloading from " + progress);
+	}, function (err, res){
+	    if (err) return console.log(err);
+	    //console.log(res);
+	    var md5result;
+            fs.readFile(to, function(err, buf) {
 			if (md5(buf) == obj.md5) {
-				console.log("ok");
+				//console.log("md5 ok");
 				md5result = true;
 			} else {	
-				console.log("nop");
+				//console.log("md5 nop");
 				md5result = false;
 			}
 			callback(md5result);
-		}); //readfile
- 	     });//fileonfinish
-
-	}).on('error', function(e) {
-		fs.unlink(dest);
-		console.log(e);
+	    }); //readfile
 	});
 }
 
@@ -218,22 +215,22 @@ function show_section() {
 
 }
 
-//interval of given delat, will execute callback with [true] or [false] as param
+//interval of given delay, will execute callback with [true] or [false] as param
 function check_serial_connected(delay, callback) {
 	setInterval(function(){
-	var cmd = "ls /dev/ttyACM*";
-	try {
-		var res = require('child_process').execSync(cmd, {
-			stdio: "pipe",
-			stderr: "pipe"
-		}).toString();
+		var cmd = "ls /dev/ttyACM*";
+		try {
+			var res = require('child_process').execSync(cmd, {
+				stdio: "pipe",
+				stderr: "pipe"
+			}).toString();
 
-	if (!res || res.length === 0 || res === undefined) res = false;
-	else res = true;
-	}
-	catch (err){
-		res = false;
-	}
-	callback(res);	
+		if (!res || res.length === 0 || res === undefined) res = false;
+		else res = true;
+		}
+		catch (err){
+			res = false;
+		}
+		callback(res);	
 	},delay);
 }
