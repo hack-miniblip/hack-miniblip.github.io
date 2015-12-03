@@ -92,6 +92,8 @@ console.log(file_url);
 	$("#firmware-list #list").append($item)
 
 	$item.click(function() {
+		$(".item").removeClass("selected");
+		$(this).addClass("selected");
 		var $div = $("#firmware-upload-section #action");
 	
 		$div.fadeOut("500", function() {
@@ -103,6 +105,7 @@ console.log(file_url);
 		});
 
 		$div.find("#upload").click(function() {
+			
 			if (isRemote) {
 				download_firmware(obj, function() {
 					//upload_firmware(file_url, "/dev/sdb");
