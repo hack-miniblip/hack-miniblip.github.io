@@ -6,6 +6,7 @@
 //
 var fs = require("fs");
 var https = require('https');
+var md5 = require('md5');
 
 
 function detect_board() {
@@ -101,13 +102,15 @@ console.log(file_url);
 
 		});
 
-		if (isRemote) {
-			download_firmware(obj, function() {
-				//upload_firmware(file_url, "/dev/sdb");
-			});
-		} else {
-			upload_firmware(file_url, "/dev/sdb");	
-		}
+		$div.find("#upload").click(function() {
+			if (isRemote) {
+				download_firmware(obj, function() {
+					//upload_firmware(file_url, "/dev/sdb");
+				});
+			} else {
+				upload_firmware(file_url, "/dev/sdb");	
+			}
+		});
 	});
 }
 
@@ -132,15 +135,35 @@ function download_firmware(obj, callback) {
     		fs.mkdirSync("./tmp");
 	}
 
+	var url = get_remote_firmware_url(obj.name);
 	var path = process.cwd() + "/tmp/" + obj.name+".bin";
-	console.log("saving in " + path);
-	console.log(obj);
+	console.log("saving from: "+ url);
+	console.log("saving to " + path );
 
 	var file = fs.createWriteStream(path);
 
-	var request = https.get(get_remote_firmware_url(obj.name), function (response) {
+	var request = https.get(url, function(response) {
+		console.log(response);
 	    response.pipe(file);
-	    callback();
+	
+	    file.on('finish', function(d) {
+		//check md5
+		var md5result;
+		fs.readFile(path, function(err, buf) {
+			if (md5(buf) == obj.md5) {
+				console.log("ok");
+				md5result = true;
+			} else {	
+				console.log("nop");
+				md5result = false;
+			}
+			callback(md5result);
+		}); //readfile
+ 	     });//fileonfinish
+
+	}).on('error', function(e) {
+		fs.unlink(dest);
+		console.log(e);
 	});
 }
 
