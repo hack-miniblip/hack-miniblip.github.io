@@ -1,11 +1,12 @@
 // TODO 
-// GET REMOTE JSON
+// OK - GET REMOTE JSON
 // DOWNLOAD FILE ON ITEM CLICK 
 // CHECK BOARD STATUS 
 // UPLOAD FIRMWARE 
 //
 var fs = require("fs");
-var http = require('http');
+var https = require('https');
+var md5 = require('md5');
 
 
 function detect_board() {
@@ -52,8 +53,10 @@ function get_list_firmwares_remote() {
 
 	$.get(url, function(data) {
 	  var obj = $.parseJSON(data);
+
+	  
 	  $.each(obj, function(i, value) {
-		add_item_to_firmware_list(obj[i], true);
+		add_item_to_firmware_list(value, true);
 	  });
 
 	});
@@ -74,7 +77,8 @@ function get_remote_firmware_url(name) {
 
 function add_item_to_firmware_list(obj, isRemote) {
 	console.log("added " + obj.name);	
-	var file_url = "";	
+	var file_url = "";
+	
 	if (isRemote) {
 		file_url = get_remote_firmware_url(obj.name);
 console.log(file_url);
@@ -82,18 +86,32 @@ console.log(file_url);
 		file_url = get_local_firmware_path(obj.name);
 	}
 
-	$("#firmware-list").append('<div class="item" id = '+obj.id +'><div class="name">' + obj.name +'</div><div class="author">'+obj.author+'</div></div>');
-			$("#firmware-list #" + obj.id).click(function() {
 
-				if (isRemote) {
-					download_firmware(file_url, function() {
-						//upload_firmware(file_url, "/dev/sdb");
-					});
-				} else {
-					upload_firmware(file_url, "/dev/sdb");	
-				}
+	$item = $('<div class="item" id = '+obj.id +'><div class="name">' + obj.name +'</div><div class="author">'+obj.author+'</div></div>');
 
-			});
+	$("#firmware-list #list").append($item)
+
+	$item.click(function() {
+		var $div = $("#firmware-upload-section #action");
+	
+		$div.fadeOut("500", function() {
+			$div.find(".name").text(obj.name);
+			$div.find(".author").text(obj.author);
+			$div.find(".source a").attr("href", obj.source);
+			$(this).fadeIn("500");
+
+		});
+
+		$div.find("#upload").click(function() {
+			if (isRemote) {
+				download_firmware(obj, function() {
+					//upload_firmware(file_url, "/dev/sdb");
+				});
+			} else {
+				upload_firmware(file_url, "/dev/sdb");	
+			}
+		});
+	});
 }
 
 function get_list_firmwares_local() {
@@ -112,18 +130,40 @@ function get_list_firmwares_local() {
 
 
 //TODO check md5
-function download_firmware(name, url, callback) {
+function download_firmware(obj, callback) {
 	if (!fs.existsSync("./tmp")){
     		fs.mkdirSync("./tmp");
 	}
 
-	var path = process.cwd() + "/" + name;
+	var url = get_remote_firmware_url(obj.name);
+	var path = process.cwd() + "/tmp/" + obj.name+".bin";
+	console.log("saving from: "+ url);
+	console.log("saving to " + path );
 
 	var file = fs.createWriteStream(path);
 
-	var request = http.get(url, function (response) {
+	var request = https.get(url, function(response) {
+		console.log(response);
 	    response.pipe(file);
-	    callback();
+	
+	    file.on('finish', function(d) {
+		//check md5
+		var md5result;
+		fs.readFile(path, function(err, buf) {
+			if (md5(buf) == obj.md5) {
+				console.log("ok");
+				md5result = true;
+			} else {	
+				console.log("nop");
+				md5result = false;
+			}
+			callback(md5result);
+		}); //readfile
+ 	     });//fileonfinish
+
+	}).on('error', function(e) {
+		fs.unlink(dest);
+		console.log(e);
 	});
 }
 
@@ -151,6 +191,20 @@ function bind_buttons() {
 		hide_all_sections();
 		show_section_code();
 	});
+}
+
+function bind_drag_and_drop_area() {
+	var holder = document.getElementById('board');
+	holder.ondragover = function () { this.className = 'hover'; return false; };
+	holder.ondragleave = function () { this.className = ''; return false; };
+	holder.ondrop = function (e) {
+	  e.preventDefault();
+
+	  for (var i = 0; i < e.dataTransfer.files.length; ++i) {
+	    console.log(e.dataTransfer.files[i].path);
+	  }
+	  return false;
+	};
 }
 
 
