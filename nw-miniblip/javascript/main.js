@@ -1,11 +1,11 @@
 // TODO 
-// GET REMOTE JSON
+// OK - GET REMOTE JSON
 // DOWNLOAD FILE ON ITEM CLICK 
 // CHECK BOARD STATUS 
 // UPLOAD FIRMWARE 
 //
 var fs = require("fs");
-var http = require('http');
+var https = require('https');
 
 
 function detect_board() {
@@ -102,7 +102,7 @@ console.log(file_url);
 		});
 
 		if (isRemote) {
-			download_firmware(file_url, function() {
+			download_firmware(obj, function() {
 				//upload_firmware(file_url, "/dev/sdb");
 			});
 		} else {
@@ -127,16 +127,18 @@ function get_list_firmwares_local() {
 
 
 //TODO check md5
-function download_firmware(name, url, callback) {
+function download_firmware(obj, callback) {
 	if (!fs.existsSync("./tmp")){
     		fs.mkdirSync("./tmp");
 	}
 
-	var path = process.cwd() + "/" + name;
+	var path = process.cwd() + "/tmp/" + obj.name+".bin";
+	console.log("saving in " + path);
+	console.log(obj);
 
 	var file = fs.createWriteStream(path);
 
-	var request = http.get(url, function (response) {
+	var request = https.get(get_remote_firmware_url(obj.name), function (response) {
 	    response.pipe(file);
 	    callback();
 	});
