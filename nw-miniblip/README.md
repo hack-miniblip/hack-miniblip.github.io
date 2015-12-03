@@ -11,7 +11,7 @@ npm install
 ```
 - Ejecutar nw.js haciendo referencia a este directorio 
 ``` 
-NWJS ../nwjs-v0.12.3-linux-x64/nw .  
+../nwjs-v0.12.3-linux-x64/nw .  
 ```
 - Voilá
 
