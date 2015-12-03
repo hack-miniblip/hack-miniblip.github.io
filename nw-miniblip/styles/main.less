@@ -95,11 +95,39 @@ body {
 
 	
 	li {
-	  padding: 10px;
+	  	padding: 10px;
+
+		&:hover {
+			color: black;
+		}
 	}
 
 }
 
+
+#firmware-upload-section {
+
+	#action {
+	    position: fixed;
+	    bottom: 0;
+	    left: 355px;
+	    width: 425px;
+	    padding: 10px;
+	    border-radius: 2px 2px 0px 0px;
+	    display: none;
+
+		#heading {
+			font-weight: 800;
+			font-size: 2em;
+		}
+
+		#upload {
+			float: right;
+			padding: 12px;
+		}
+	}
+
+}
 
 #firmware-list {
   float: left;
@@ -108,9 +136,19 @@ body {
   height: 500px;
   font-size: 1.2em;
 
+  h1 {
+	  font-size: 1em;
+	  text-transform: uppercase;
+	  font-weight: 800;
+	  color: gray;
+	  padding: 18px 0px;
+	  text-align: center;
+  }
+
   .item {
 	  border-bottom: 1px dotted black;
 	  padding: 11px;
+	  cursor: pointer;
 
 	.name {
 	  font-weight: bold;
@@ -126,6 +164,21 @@ body {
  	 background: rgba(0, 0, 0, 0.08);
 	}
   }
+}
+
+#info_todo {
+  z-index: 10;
+  background: rgb(245, 105, 105);
+  bottom: 0;
+  position: absolute;
+  width: 500px;
+  border-radius: 2px 2px 0px 0px;
+  padding: 18px;
+  font-size: 2em;
+  color: white;
+  box-shadow: 2px 2px 16px black;
+  left: 144px;
+  font-weight: 800;
 }
 
 #editor {
@@ -145,6 +198,18 @@ body {
   img {
 	  width: 300px;
 	  opacity: 0.5;
+	  margin-top: 15%;
   }
+
+  #info {
+	  margin-top: 10px;
+	  font-size: 1.2em;
+	  color: gray;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events:none;
 }
 
