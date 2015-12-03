@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Hack-Miniblip - Programando la placa</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="#">Programando la placa</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Hack-Miniblip</a></li>
+							<li><a href="#one">Conectar</a></li>
+							<li><a href="#two">Compilar</a></li>
+							<li><a href="#three">Instalar firmware</a></li>
+							<li><a href="#four">Pinout</a></li>
+							<li><a href="#five">Compilación offline</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>Programación de la placa</h2>
+							<p>Guía sobre cómo comenzar a crear, compilar y cargar un nuevo firmware</p>
+						</header>
+
+						<!-- Content -->
+							<section id="content">
+								<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+								<small class="imgauthor">Imagen: <a href="https://github.com/iblancasa">@iblancasa</a></small>
+								<h3 id="one">Cómo conectar la placa</h3>
+								<p>La placa tiene dos modos: un modo "programación" y otro "ejecución". Cuando
+								quieras progamarla, deberás conectarla en el primero mientras que, si deseas que se ejecute
+								el firmware que hayas subido, deberás conectarla como el segundo. Para conectar en modo "ejecución",
+								solo tendrás que conectar la placa a un puerto USB. Para utilizarla en modo "programación",
+								tendrás que conectarla mientras (en la placa) pulsas el botón rectangular que hay más próximo a la conexión USB</p>
+
+								<h3 id="two">Creando y compilando un fichero</h3>
+								<p>La placa se programa en C++. Puedes ver algunos ejemplos en el perfil de
+									<a href="https://developer.mbed.org/users/pighixxx/">Alberto Piganti</a>, creador de la placa.</p>
+								<p>Para programar, necesitarás primero una cuenta en <a href="https://developer.mbed.org/">MBED</a>. Una
+									vez que te hayas registrado, ve <a href="https://developer.mbed.org/compiler/">al compilador</a>.
+									En la parte superior derecha (o al crear un nuevo proyecto) se nos solicitará el modelo de placa que estamos
+									utilizando. Hay que indicar "MBED LPC11U24".
+								</p>
+								<p>Una vez hayas terminado de programar podrás pulsar "Compile" en la barra de herramientas superior.
+									Si no hay errores de programación, se te descargará un fichero cuya extensión es ".bin" (es el firmware)
+									que instalaremos en nuestro dispositivo.
+								</p>
+
+								<h3 id="three">Instalando un nuevo firmware a la placa</h3>
+								<p>Este paso es importante en función del sistema operativo en el que te encuentres:</p>
+								<ul>
+									<li><i class="fa fa-apple">MAC</i> ó <i class="fa fa-windows">Windows</i>: tienes
+									disponibles los cargadores en <a href="http://www.circolab.org/miniblip/">la web oficial
+									de la placa</a>: al abrir la ventana, tendrás un dibujo de la placa (que si está bien montada en el sistema,
+									aparecerá coloreada). Arrastra el nuevo firmware sobre la placa y éste será cargado.</li>
+									<li><i class="fa fa-linux"></i>Linux: cuando esta página es publicada, el cargador no funciona
+									demasiado bien. Puedes cargar tu firmware con
+									<a href="https://github.com/hack-miniblip/hack-miniblip.github.io/blob/master/Scripts/miniblip_loader.sh">este cargador</a>
+									escrito en Bash.
+									Solo tendrás que darle permisos de ejecución y ponerlo en marcha, pasando como argumento el nombre de tu firmware (que debe estar)
+									en la misma carpeta que el script.
+									<code>chmod +x miniblip_loader.sh; ./miniblip_loader firmware.bin</code>
+									</li>
+								</ul>
+
+								<h3 id="four">Pinout</h3>
+								<a href="esquema_minilip_pinout.png"><img src="esquema_minilip_pinout.png" width="40%"/></a>
+
+								<h3 id="five">Compilación offline</h3>
+								<p><a href="https://github.com/jj">JJ. Merelo</a> documentó en el repositorio cómo compilar
+								de forma local.</p>
+								<p>Instálate el entorno de programación siguiendo
+									<a href="https://launchpad.net/~terry.guo/+archive/ubuntu/gcc-arm-embedded">estas instrucciones</a></p>
+									<p>Te puedes descargar el programa completo del entorno pulsando con el botón de la derecha y dándole
+									a "Export program".	Descomprime el ".zip" que te bajes en un fichero. Edita el "Makefile" y edita esta línea para poner</p>
+									<code>
+										GCC_BIN = /usr/bin/
+									</code>
+									<p>que es donde se instala el compilador.</p>
+									<p>
+									Puede que te dé algún problema del estilo:
+									</p>
+									<code>
+										/usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/bin/ld: colorines.elf section `.text' will not fit in region `FLASH'
+									</code>
+									<br>
+									<code>
+										/usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/bin/ld: region `FLASH' overflowed by 208 bytes
+									</code>
+									<p>En cuyo caso tendrás que recortar el tamaño del fichero, quitando variables e info de depuración, por ejemplo.</p>
+									<p>Si no te da ningún problema, te generará un .bin. Ya casi estás.
+										Tendrás que pillarte el programa <a href="https://github.com/hack-miniblip/hack-miniblip.github.io/blob/master/Scripts/crcset.c">crcset.c</a> y compilarlo.
+										Este programa pone los bits de comprobación correctamente, para evitar el error que sale al final:</p>
+									<code>
+										*****
+										***** You must modify vector checksum value in *.bin and *.hex files.
+										*****
+									</code>
+									<p>
+										Con eso, ya haces:
+									</p>
+									<code>
+										./crcset nombre-del-programa.bin
+									</code>
+									<p>
+										¡Y ya estás listo!
+									</p>
+							</section>
+
+					</div>
+				</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<ul class="copyright">
+					<li>&copy; The Artistic License 2.0. <a href="https://github.com/hack-miniblip/">
+						Hack-Miniblip</a></li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

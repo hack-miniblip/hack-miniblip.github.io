@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Hack-Miniblip - Programando la placa</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="#">Participa</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Hack-Miniblip</a></li>
+							<li><a href="#one">¿Conoces Git?</a></li>
+							<li><a href="#two">Ficheros fuente</a></li>
+							<li><a href="#three">Binarios</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>Participa</h2>
+							<p>Guía sobre cómo contribuir al repositorio y que tu código no quede en un cajón</p>
+						</header>
+
+						<!-- Content -->
+							<section id="content">
+								<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+								<small class="imgauthor">Imagen: <a href="https://github.com/jj">@JJ</a>, <a href="https://github.com/fergunet">@fergunet</a>,
+								<a href="https://twitter.com/cir_co_lab">@cir_co_lab</a></small>
+								<h3 id="one">¿Sabes qué es Git? ¿Y GitHub?</h3>
+								<p>Si nunca has utilizado Git o GitHub, debes empezar por ahí. No es difícil,
+								vuelve en cuanto sepas cómo funciona.</p>
+
+								<h3 id="two">Repositorio de ficheros fuente</h3>
+								<p>Sube los ficheros fuente a <a href="https://github.com/hack-miniblip/hack-miniblip.github.io">este
+									repositorio</a> (primero haz un "fork" y, cuando acabes, haz un "pull request" -asegúrate que antes has
+									hecho pull desde el repositorio "maestro"-).</p>
+								<p>Puedes preguntar si tienes dudas
+									<a href="https://github.com/hack-miniblip/hack-miniblip.github.io/issues">(abriendo un issue)</a>.
+								</p>
+
+								<h3 id="three">Repositorio de binarios</h3>
+								<p>Las instrucciones muy similares al caso anterior, pero <a href="https://github.com/hack-miniblip/apps/">
+									la idea es crear un repositorio solo con los binarios</a>.
+								</p>
+								<p>Se pide que se respete la siguiente estructura de ficheros:<br>
+									./&lt;projectName&gt;<br>
+									./&lt;projectName&gt;/firmware.bin<br>
+									./&lt;projectName&gt;/cover.png (64x64 / optional)<br>
+									./&lt;projectName&gt;/README.md
+								</p>
+								<p>Y que añadas tu proyecto al JSON de la raíz del repositorio (con la estructura que sigue):
+									<code><br>
+										{<br>
+										  "name": "anim",<br>
+										  "author" : "Your GitHub/MBED id",<br>
+										  "version": "0.0.1",<br>
+										  "tags": ["light","sound","game"],<br>
+										  "md5": "efefefababab" ,<br>
+										  "cover": true,<br>
+										  "license": "GPL, Apache or whatever",<br>
+										  "source": "http://github.com/this/is/the/source"<br>
+										}
+									</code>
+								</p>
+								<p> Para generar el campo md5: <pre>md5sum firmware.bin</pre></p>
+							</section>
+
+					</div>
+				</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<ul class="copyright">
+					<li>&copy; The Artistic License 2.0. <a href="https://github.com/hack-miniblip/">
+						Hack-Miniblip</a></li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

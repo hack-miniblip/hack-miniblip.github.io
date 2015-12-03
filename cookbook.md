@@ -14,6 +14,12 @@
 
     #define NLEDS 25
 
+    #define AD0 P0_11
+    #define AD1 P0_12
+    #define AD2 P0_13
+    #define AD3 P0_14
+    #define AD4 P0_15
+
 # Sonidos
 
     PwmOut speaker(SPEAKER_PIN); // el P0_8
@@ -23,6 +29,18 @@
 
 
 # Lectura de valores analógicos
+
+El LPC11u24 tiene 8 adc de los que MiniBip tiene disponibles 7 (el octavo está conectado al botón y solo se usa como digital)
+
+    5 contactos circulares
+      AD0 en P0.11
+      AD1 en P0.12
+      AD2 en P0.13
+      AD3 en P0.14
+      AD4 en P0.15
+    LDR en P0.16
+    Potenciómetro en P0.22
+
 
 ## Potenciometro
 
@@ -40,6 +58,20 @@
 
     // Podemos usar el ejemplo en python ./ejemplos/leds_serial_potenciometro_buzzer/pythonserial.py
     // Podemos usar cualquier program monitor serie como Putty o minicom
+
+# Lectura del puerto serie
+
+    // Importamos la librería USBDevice
+    #include "USBSerial.h"
+
+    USBSerial serial;
+
+    char* readBuffer;
+
+    serial.scanf("%s",readBuffer);
+
+    // OJO: scanf es bloqueante, así que el main loop no continuará hasta que sea lea algo.
+    // Para tener algo que leer, se pueden enviar datos por el puerto serie con 'echo 1 > /dev/ttyACM0'
 
 # Botones
 

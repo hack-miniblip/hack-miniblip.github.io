@@ -1,0 +1,6 @@
+data/neopixel-spi.lib.i
+data/BurstSPI.lib.i
+data/PixelArray.lib.i
+data/main.cpp.i
+data/mbed.bld.i
+data/neopixel.lib.i

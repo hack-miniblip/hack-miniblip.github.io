@@ -12,12 +12,12 @@ else
 	then
 		port=$(mount | grep "MINIBLIP" | grep -Eo "^[^ ]+");
 	fi
-	
+
 	if [ "$port" == "" ]
 	then
 		echo "Not mounted"
 	else
-		sudo dd if=$1 of=$port bs=512 seek=4 conv=notrunc
+		sudo dd if="$1" of=$port bs=512 seek=4 conv=notrunc
 		sudo umount $port
 	fi
 fi

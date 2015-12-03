@@ -220,3 +220,23 @@ function show_section() {
 	
 
 }
+
+//interval of given delat, will execute callback with [true] or [false] as param
+function check_serial_connected(delay, callback) {
+	setInterval(function(){
+	var cmd = "ls /dev/ttyACM*";
+	try {
+		var res = require('child_process').execSync(cmd, {
+			stdio: "pipe",
+			stderr: "pipe"
+		}).toString();
+
+	if (!res || res.length === 0 || res === undefined) res = false;
+	else res = true;
+	}
+	catch (err){
+		res = false;
+	}
+	callback(res);	
+	},delay);
+}

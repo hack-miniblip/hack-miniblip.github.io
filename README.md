@@ -2,10 +2,12 @@
 
 Hackea la MiniBlip, repo para el hackatón CircoLab/BQ/Miniblip
 
+Puedes ver este contenido en versión [web](http://hack-miniblip.github.io/).
+
 La [miniblip es](https://github.com/bqlabs/miniBLIP) una placa creada
 por [BQ](http://github.com/bqlabs) para *wearables* y lo que
 surja. Tiene dos botones, 5 botones capacitivos y un array de
-leds. Está basada en un ARM Cortex-M0 a 48MHz. Incluye 32KB FLASH, 8KB RAM
+leds. Está basada en un ARM Cortex-M0 a 48MHz, el LPC11U24 que incluye 32KB FLASH y 8KB RAM y funciona a 48MHz ([más detalles](https://developer.mbed.org/platforms/mbed-LPC11U24/#features))
 
 ## Cómo comenzar
 
@@ -52,11 +54,11 @@ fichero.
 3. Finalmente, desmontamos la miniblip, bien con el entorno gráfico o con terminal
 
 ```
-    umount /deb/sbd
+umount /dev/sdb
+
 ```
 
-Usando el script [miniblip_loader](miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
-
+Usando el script [miniblip_loader](Scripts/miniblip_loader.sh) podemos cargar nuestros programas automáticamente    
 ```shell
 	$ miniblip_loader.sh + [firmware.bin]`
 ```
@@ -67,6 +69,10 @@ Usando el script [miniblip_loader](miniblip_loader.sh) podemos cargar nuestros p
 
 Al conectar de nuevo el sistema empezará a funcionar el nuevo
 programa.
+
+## Binarios
+
+Puedes ver los binarios en [este repositorio](https://github.com/hack-miniblip/apps/). Si quieres subir el tuyo propio, haz un *fork*, [incorpora tu binario siguiendo las instrucciones](https://github.com/hack-miniblip/apps/blob/master/README.md) y haz un pull request.
 
 ## Para añadir a este repo
 
@@ -86,3 +92,35 @@ Podéis hacer un pull request a este repo o un simple enlace a este README.
 
 [Cookbook](cookbook.md) con cosillas
 
+## Compilándolo en local
+
+Te puedes descargar el programa completo del entorno pulsando con el botón de la derecha y dándole a "Export program".
+
+Instálate el entorno de programación siguiendo [estas instrucciones](https://launchpad.net/~terry.guo/+archive/ubuntu/gcc-arm-embedded)
+
+Descomprime el .zip que te bajes en un fichero. Edita el `Makefile` y edita esta línea para poner
+
+    GCC_BIN = /usr/bin/
+
+que es donde se instala el compilador.
+
+Puede que te dé algún problema del estilo
+
+```
+/usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/bin/ld: colorines.elf section `.text' will not fit in region `FLASH'
+/usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/bin/ld: region `FLASH' overflowed by 208 bytes
+```
+
+En cuyo caso tendrás que recortar el tamaño del fichero, quitando variables e info de depuración, por ejemplo.
+
+Si no te da ningún problema, te generará un `.bin`. Ya casi estás. Tendrás que pillarte el [programa `crcset.c`](Scripts/crcset.c) y compilarlo. Este programa pone los bits de comprobación correctamente, para evitar el error que sale al final:
+
+    *****
+	***** You must modify vector checksum value in *.bin and *.hex files.
+	*****
+
+Con eso, ya haces
+
+	./crcset nombre-del-programa.bin
+
+¡Y ya estás listo!

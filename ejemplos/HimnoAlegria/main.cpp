@@ -1,3 +1,6 @@
+// miniblip play notes with interrupts - Not tested with led matrix
+// For documentation see http://mbed.org/users/4180_1/notebook/using-a-speaker-for-audio-output/
+
 #include "mbed.h"
 #include "SongPlayer.h"
 
@@ -72,9 +75,9 @@ NEGRA,
 TSILENCIO,
 BLANCA,
 TSILENCIO,
-BLANCA,
+BLANCA, 
 0.0
-};
+                    };
 
 int main()
 {
@@ -87,3 +90,5 @@ int main()
         wait(.1);
     }
 }
+
+

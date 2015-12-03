@@ -12,7 +12,11 @@ Usa la función fill_pixel de @javacasm, que está en https://github.com/hack-mi
 
 #define ANALOG_PHOTO P0_16
 #define ANALOG_POTENTIOMETER P0_22
+#define ANALOG_BUZZER P0_8
+#define DIGITAL_CIRCLE P0_12
+
 AnalogIn   ain(ANALOG_POTENTIOMETER);
+AnalogIn din(DIGITAL_CIRCLE);
 
 void fill_pixel(neopixel::Pixel buffer[25], int x, int y, int red, int green, int blue){
     
@@ -59,7 +63,18 @@ int sonrisaRegular[5][5] = {
 {0,0,0,0,0},
 {1,1,1,1,1},
 {0,0,0,0,0}
-};   
+};  
+
+
+int bocaAbierta[5][5] = {
+{0,1,0,1,0},
+{0,1,0,1,0},
+{0,1,1,1,0},
+{1,0,0,0,1},
+{0,1,1,1,0}
+};
+
+ 
 
  
 
@@ -100,9 +115,11 @@ int main()
                 drawVector(sonrisaRegular,vector,0,255,0);
             else
                 drawVector(sonrisa,vector,255,0,0);
-        
+        float pushed = din.read();
+        if(pushed>0.5)
+            drawVector(bocaAbierta,vector,255,255,0);
         array.update(vector, 64);
-        wait_ms(500);
+        wait_ms(75);
         
     }
 }
