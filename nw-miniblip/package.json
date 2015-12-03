@@ -1,11 +1,17 @@
 {
   "name": "miniblip",
   "version": "0.0.1",
+  "license" : "GPL-3.0",
   "main": "index.html",
   "window": {
     "toolbar": true,
     "width": 960,
     "height": 800,
     "resizable": false
-  }
+  },
+  "dependencies" : { 
+        "md5" : ">=1.3.0",
+        "httpreq" : ">=0.4.16", 
+        "sudo-prompt" : "2.1.0"
+    }
 }

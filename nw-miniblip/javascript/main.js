@@ -8,6 +8,8 @@ var fs = require("fs");
 var https = require('https');
 var md5 = require('md5');
 var httpreq = require('httpreq');
+var sudo = require('sudo-prompt');
+
 
 
 function detect_board() {
@@ -15,12 +17,24 @@ function detect_board() {
 
 } 
 
-function upload_firmware(path_in, path_out) {
-	var cmd_dd = "sudo dd if="+path_in+" of="+path_out+" bs=512 seek=4 conv=notrunc";
+function upload_firmware(path_in) {
+	var path_out = "/dev/sdb";
+	var cmd_dd = "dd if="+path_in+" of="+path_out+" bs=512 seek=4 conv=notrunc";
 
 	console.log(cmd_dd);
 
 
+	var options = {
+	  name: 'MiniBlip Studio',
+	  onChildProcess: function(childProcess) {} // (optional)
+	};
+	sudo.exec(cmd_dd, options, function(error, stdout, stderr) {
+		console.log("error " + error);
+		console.log("stdout " + stdout);
+		console.log("stderr " + stderr);
+	})
+
+	/*
 	var execFile = require 
 	    ('child_process').execFile, child;
 
@@ -39,6 +53,7 @@ function upload_firmware(path_in, path_out) {
 	    console.log('Child process exited '+
 		'with exit code '+ code);
 	  });
+	*/
 } 
 
 
@@ -82,7 +97,6 @@ function add_item_to_firmware_list(obj, isRemote) {
 	
 	if (isRemote) {
 		file_url = get_remote_firmware_url(obj.name);
-console.log(file_url);
 	} else { 
 		file_url = get_local_firmware_path(obj.name);
 	}
@@ -102,14 +116,13 @@ console.log(file_url);
 			$div.find(".author").text(obj.author);
 			$div.find(".source a").attr("href", obj.source);
 			$(this).fadeIn("500");
-
 		});
 
 		$div.find("#upload").click(function() {
 			
 			if (isRemote) {
-				download_firmware(obj, function() {
-					upload_firmware(file_url, "/dev/sdb");
+				download_firmware(obj, function(isOk, local_path) {
+					if (isOk) upload_firmware(local_path);
 				});
 			} else {
 				upload_firmware(file_url, "/dev/sdb");	
@@ -159,7 +172,7 @@ function download_firmware(obj, callback) {
 				//console.log("md5 nop");
 				md5result = false;
 			}
-			callback(md5result);
+			callback(md5result, to);
 	    }); //readfile
 	});
 }
@@ -198,7 +211,7 @@ function bind_drag_and_drop_area() {
 	  e.preventDefault();
 
 	  for (var i = 0; i < e.dataTransfer.files.length; ++i) {
-	    console.log(e.dataTransfer.files[i].path);
+	    upload_firmware(e.dataTransfer.files[i].path);
 	  }
 	  return false;
 	};
