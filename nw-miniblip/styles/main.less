@@ -105,6 +105,30 @@ body {
 }
 
 
+#firmware-upload-section {
+
+	#action {
+	    position: fixed;
+	    bottom: 0;
+	    left: 355px;
+	    width: 425px;
+	    padding: 10px;
+	    border-radius: 2px 2px 0px 0px;
+	    display: none;
+
+		#heading {
+			font-weight: 800;
+			font-size: 2em;
+		}
+
+		#upload {
+			float: right;
+			padding: 12px;
+		}
+	}
+
+}
+
 #firmware-list {
   float: left;
   width: 200px;
@@ -124,6 +148,7 @@ body {
   .item {
 	  border-bottom: 1px dotted black;
 	  padding: 11px;
+	  cursor: pointer;
 
 	.name {
 	  font-weight: bold;
@@ -174,6 +199,12 @@ body {
 	  width: 300px;
 	  opacity: 0.5;
 	  margin-top: 15%;
+  }
+
+  #info {
+	  margin-top: 10px;
+	  font-size: 1.2em;
+	  color: gray;
   }
 }
 

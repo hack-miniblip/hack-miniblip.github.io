@@ -52,8 +52,10 @@ function get_list_firmwares_remote() {
 
 	$.get(url, function(data) {
 	  var obj = $.parseJSON(data);
+
+	  
 	  $.each(obj, function(i, value) {
-		add_item_to_firmware_list(obj[i], true);
+		add_item_to_firmware_list(value, true);
 	  });
 
 	});
@@ -74,7 +76,8 @@ function get_remote_firmware_url(name) {
 
 function add_item_to_firmware_list(obj, isRemote) {
 	console.log("added " + obj.name);	
-	var file_url = "";	
+	var file_url = "";
+	
 	if (isRemote) {
 		file_url = get_remote_firmware_url(obj.name);
 console.log(file_url);
@@ -82,18 +85,30 @@ console.log(file_url);
 		file_url = get_local_firmware_path(obj.name);
 	}
 
-	$("#firmware-list #list").append('<div class="item" id = '+obj.id +'><div class="name">' + obj.name +'</div><div class="author">'+obj.author+'</div></div>');
-			$("#firmware-list #" + obj.id).click(function() {
 
-				if (isRemote) {
-					download_firmware(file_url, function() {
-						//upload_firmware(file_url, "/dev/sdb");
-					});
-				} else {
-					upload_firmware(file_url, "/dev/sdb");	
-				}
+	$item = $('<div class="item" id = '+obj.id +'><div class="name">' + obj.name +'</div><div class="author">'+obj.author+'</div></div>');
 
+	$("#firmware-list #list").append($item)
+
+	$item.click(function() {
+		var $div = $("#firmware-upload-section #action");
+	
+		$div.fadeOut("500", function() {
+			$div.find(".name").text(obj.name);
+			$div.find(".author").text(obj.author);
+			$div.find(".source a").attr("href", obj.source);
+			$(this).fadeIn("500");
+
+		});
+
+		if (isRemote) {
+			download_firmware(file_url, function() {
+				//upload_firmware(file_url, "/dev/sdb");
 			});
+		} else {
+			upload_firmware(file_url, "/dev/sdb");	
+		}
+	});
 }
 
 function get_list_firmwares_local() {

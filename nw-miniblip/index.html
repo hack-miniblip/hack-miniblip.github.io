@@ -25,6 +25,12 @@
 	    editor.setOptions({
 		  fontSize: "15pt"
 	    });
+
+	    //open source links in a new browser 
+	   $('a[target=_blank]').on('click', function(){
+	      require('nw.gui').Shell.openExternal( this.href );
+	      return false;
+	   });
 	});
   </script>
 
@@ -42,13 +48,34 @@
 
 	<div id = "main">
 
-		<div id = "firmware-list"> 
-			<h1> FIRMWARES </h1>
-			<div id = "list"> </div>
-		</div>
+		<div id = "firmware-upload-section">
+		
+			<div id="action"> 
+				<div class="info"> 
+					  <div class="heading">
+					    <div class="name"></div>
+					    <div class="author"></div>
+					    <div class="source"><a target = "_blank" href="">source</a></div>
+					  </div>
+					<div id="description"></div>
+				</div>
 
-	    	<div id = "board"> 
-			<img src="./images/miniblip_board.png">
+				<button id = "upload"> upload firmware </button> 
+			</div>
+
+
+
+
+			<div id = "firmware-list"> 
+				<h1> FIRMWARES </h1>
+				<div id = "list"> </div>
+			</div>
+
+		    	<div id = "board"> 
+				<img src="./images/miniblip_board.png">
+				<h1 id = "info"> MINIBLIP no ha sido detectada </h1>
+			</div>
+
 		</div>
 
 		<div id="editor-container">
