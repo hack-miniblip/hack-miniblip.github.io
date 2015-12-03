@@ -8,6 +8,8 @@ var fs = require("fs");
 var https = require('https');
 var md5 = require('md5');
 var httpreq = require('httpreq');
+var sudo = require('sudo-prompt');
+
 
 
 function detect_board() {
@@ -15,13 +17,13 @@ function detect_board() {
 
 } 
 
-function upload_firmware(path_in, path_out) {
+function upload_firmware(path_in) {
+	var path_out = "/dev/sdb";
 	var cmd_dd = "dd if="+path_in+" of="+path_out+" bs=512 seek=4 conv=notrunc";
 
 	console.log(cmd_dd);
 
 
-	var sudo = require('sudo-prompt');
 	var options = {
 	  name: 'MiniBlip Studio',
 	  onChildProcess: function(childProcess) {} // (optional)
@@ -120,7 +122,7 @@ function add_item_to_firmware_list(obj, isRemote) {
 			
 			if (isRemote) {
 				download_firmware(obj, function(isOk, local_path) {
-					if (isOk) upload_firmware(local_path, "/dev/sdb");
+					if (isOk) upload_firmware(local_path);
 				});
 			} else {
 				upload_firmware(file_url, "/dev/sdb");	
@@ -209,7 +211,7 @@ function bind_drag_and_drop_area() {
 	  e.preventDefault();
 
 	  for (var i = 0; i < e.dataTransfer.files.length; ++i) {
-	    console.log(e.dataTransfer.files[i].path);
+	    upload_firmware(e.dataTransfer.files[i].path);
 	  }
 	  return false;
 	};
