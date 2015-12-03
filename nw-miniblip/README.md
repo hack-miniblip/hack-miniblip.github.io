@@ -6,13 +6,13 @@ Programa multiproposito para trabajar con la Miniblip
 
 - Descargar NW.JS de http://nwjs.io y poner el directorio al mismo nivel que este 
 - Bajar dependencias 
-´´´ 
+```
 npm install
-´´
+```
 - Ejecutar nw.js haciendo referencia a este directorio 
-´´´ 
+``` 
 NWJS ../nwjs-v0.12.3-linux-x64/nw .  
-´´´
+```
 - Voilá
 
 ## Caractesticas futuras
