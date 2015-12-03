@@ -2,7 +2,6 @@
 
        wait_ms(100); // Milisegundos
 
-
 # Defines de los pines
 
     #define MATRIX_PIN P0_9
@@ -96,3 +95,9 @@ El LPC11u24 tiene 8 adc de los que MiniBip tiene disponibles 7 (el octavo está 
     {
       return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
+
+# Matriz de Leds
+
+Disponemos de 25 leds, que podemos direccionar desde el 0 al 24 con la librería PixelArray
+
+Podemos añadir más leds conectando la entrada al pin LDOut
