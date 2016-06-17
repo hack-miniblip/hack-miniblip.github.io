@@ -94,11 +94,22 @@ Podéis hacer un pull request a este repo o un simple enlace a este README.
 
 ## Compilándolo en local
 
-Te puedes descargar el programa completo del entorno pulsando con el botón de la derecha y dándole a "Export program".
+Te puedes descargar el programa completo del entorno pulsando con el
+botón de la derecha y dándole a "Export program", pero necesitarás
+algo más para compilar.
 
-Instálate el entorno de programación siguiendo [estas instrucciones](https://launchpad.net/~terry.guo/+archive/ubuntu/gcc-arm-embedded)
+En [este tutorial](http://gnuarmeclipse.github.io/toolchain/install/)
+vienen instrucciones para crear el entorno de programación local. 
 
-Descomprime el .zip que te bajes en un fichero. Edita el `Makefile` y edita esta línea para poner
+1. Instálate el entorno de programación siguiendo
+   [estas instrucciones](https://launchpad.net/gcc-arm-embedded). En
+   esa página hay enlaces a un PPA (para instalación y actualización
+   desde repo) o te lo puedes bajar en .zip. En algunas versiones de
+   Ubuntu no será necesario, basta con hacer
+
+	sudo apt-get install gcc-arm-none-eabi binutils-arm-none-eabi
+
+2. Descomprime el .zip que te hayas bajado del entorno en un fichero. Edita el `Makefile` y edita esta línea para poner
 
     GCC_BIN = /usr/bin/
 
@@ -123,4 +134,11 @@ Con eso, ya haces
 
 	./crcset nombre-del-programa.bin
 
-¡Y ya estás listo!
+¡Y ya estás listo! El programa `crcset` está incluido en este repo.
+
+En el
+[repositorio de CirCoLab](https://github.com/circolab/miniblip_examples)
+tienes también un ejemplo, `colorines`, con todos los ficheros
+necesarios. Simplemente edita el programa `main.cpp` en ese directorio
+y escribe Make para crear el fichero de salida; aún así, tendrás que
+tener los compiladores necesarios instalados.
